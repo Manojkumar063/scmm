@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCM Expert - My Shipments</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="/static/css/style.css" rel="stylesheet"/>
+  <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      min-height: 100vh;
+    }
+    .nav-link.active {
+      background-color: #0d6efd;
+      font-weight: bold;
+    }
+    .card h4 {
+      margin: 0;
+    }
+    .modal-header, .modal-footer {
+      background-color: #f1f1f1;
+    }
+    .modal-title {
+      font-weight: bold;
+    }
+    .spinner-container {
+      z-index: 1050;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
+        <div class="position-sticky pt-3 text-center">
+          <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid mb-3" style="max-width: 150px;">
+          <h6 id="userRole">Welcome, User</h6>
+          <ul class="nav flex-column mt-4">
+            <li class="nav-item"><a class="nav-link text-white" href="/dashboard"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link active text-white" href="/shipments"><i class="bi bi-box-seam me-2"></i>Shipments</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="/device-data"><i class="bi bi-graph-up me-2"></i>Device Data</a></li>
+            <li class="nav-item" id="adminUsersLink" style="display: none;"><a class="nav-link text-white" href="/users"><i class="bi bi-people me-2"></i>Users</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between align-items-center py-4">
+          <h2 class="fw-bold">My Shipments</h2>
+          <div>
+            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newShipmentModal">
+              <i class="bi bi-plus-lg"></i> New Shipment
+            </button>
+            <button class="btn btn-outline-secondary" onclick="refreshShipments()">
+              <i class="bi bi-arrow-clockwise"></i> Refresh
+            </button>
+          </div>
+        </div>
+                <div class="d-flex justify-content-end mb-3">
+                          <a href="/shipments/export" class="btn btn-success mb-3">
+                  <i class="bi bi-download"></i> Export Shipments as CSV
+                </a>
+
+        </div>
+
+        <!-- Status Cards -->
+        <div class="row g-4 mb-4">
+          <div class="col-md-3">
+            <div class="card text-white bg-primary shadow-sm">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <small>Total Shipments</small>
+                  <h4 id="totalShipments">2</h4>
+                </div>
+                <i class="bi bi-box-seam fs-2"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-white bg-info shadow-sm">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <small>In Transit</small>
+                  <h4 id="inTransitShipments">01</h4>
+                </div>
+                <i class="bi bi-truck fs-2"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-white bg-success shadow-sm">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <small>Delivered</small>
+                  <h4 id="deliveredShipments">0</h4>
+                </div>
+                <i class="bi bi-check-circle fs-2"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-white bg-warning shadow-sm">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <small>Alerts</small>
+                  <h4 id="shipmentAlerts">1</h4>
+                </div>
+                <i class="bi bi-exclamation-triangle fs-2"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipment Table -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-white fw-bold">
+            <i class="bi bi-table me-2"></i> Active Shipments
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered align-middle" id="shipmentsTable">
+                <thead class="table-light">
+                  <tr>
+                    <th>Shipment Number</th>
+                    <th>Route</th>
+                    <th>Device ID</th>
+                    <th>PO Number</th>
+                    <th>NDC Number</th>
+                    <th>Goods Number</th>
+                    <th>Container Number</th>
+                    <th>Goods Type</th>
+                    <th>Expected Delivery</th>
+                    <th>Delivery Number</th>
+                    <th>Batch ID</th>
+                    <th>Description</th>
+                    <th>User Email</th>
+                    <th>Created At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for shipment in shipments %}
+                <tr>
+                  <td>{{ shipment.shipment_number }}</td>
+                  <td>{{ shipment.route }}</td>
+                  <td>{{ shipment.device_id }}</td>
+                  <td>{{ shipment.po_number }}</td>
+                  <td>{{ shipment.ndc_number }}</td>
+                  <td>{{ shipment.goods_number }}</td>
+                  <td>{{ shipment.container_number }}</td>
+                  <td>{{ shipment.goods_type }}</td>
+                  <td>{{ shipment.expected_delivery_date }}</td>
+                  <td>{{ shipment.delivery_number }}</td>
+                  <td>{{ shipment.batch_id }}</td>
+                  <td>{{ shipment.shipment_description }}</td>
+                  <td>{{ shipment.user_id }}</td>
+                  <td>{{ shipment.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Create Shipment Modal -->
+  <div class="modal fade" id="newShipmentModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="newShipmentForm">
+          <div class="modal-header">
+            <h5 class="modal-title">Create New Shipment</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="originAddress" class="form-label">Origin Address</label>
+              <input type="text" class="form-control" id="originAddress" required>
+            </div>
+            <div class="mb-3">
+              <label for="destinationAddress" class="form-label">Destination Address</label>
+              <input type="text" class="form-control" id="destinationAddress" required>
+            </div>
+            <div class="mb-3">
+              <label for="shipmentType" class="form-label">Shipment Type</label>
+              <select class="form-select" id="shipmentType" required>
+                <option value="">Select type...</option>
+                <option value="standard">Standard</option>
+                <option value="express">Express</option>
+                <option value="cold-chain">Cold Chain</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Temperature Range (°C)</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="minTemp" placeholder="Min">
+                <span class="input-group-text">to</span>
+                <input type="number" class="form-control" id="maxTemp" placeholder="Max">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" onclick="createShipment()">Create Shipment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spinner -->
+  <div class="spinner-container d-none position-fixed top-50 start-50 translate-middle">
+    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/my_shipment.js"></script>
+  <script src="/static/js/security.js"></script>
+</body>
+</html>

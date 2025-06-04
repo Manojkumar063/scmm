@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCM Expert - User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --sidebar-bg: #1f2937;
+            --sidebar-text: #e5e7eb;
+            --accent-color: #3b82f6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8fafc;
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, var(--sidebar-bg) 0%, #374151 100%);
+            min-height: 100vh;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar .nav-link {
+            color: var(--sidebar-text);
+            padding: 12px 20px;
+            margin: 4px 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar .nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            transform: translateX(4px);
+        }
+
+        .sidebar .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-color), #2563eb);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .sidebar .nav-link i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .logo-container {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+            filter: brightness(1.1);
+        }
+
+        .welcome-text {
+            color: var(--sidebar-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .page-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .btn-group .btn {
+            padding: 10px 20px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #2563eb);
+            border: none;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .btn-outline-secondary {
+            border: 2px solid #6b7280;
+            color: #6b7280;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .border-left-primary { border-left: 4px solid var(--accent-color) !important; }
+        .border-left-success { border-left: 4px solid #10b981 !important; }
+        .border-left-info { border-left: 4px solid #06b6d4 !important; }
+        .border-left-warning { border-left: 4px solid #f59e0b !important; }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .text-primary { color: var(--accent-color) !important; }
+        .text-success { color: #10b981 !important; }
+        .text-info { color: #06b6d4 !important; }
+        .text-warning { color: #f59e0b !important; }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            font-weight: 600;
+            padding: 18px 25px;
+            border: none;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        .table th {
+            background: #f8fafc;
+            color: var(--primary-color);
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        .table td {
+            padding: 15px;
+            vertical-align: middle;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            border: none;
+            padding: 20px 25px;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .spinner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active { background: #dcfce7; color: #166534; }
+        .status-inactive { background: #fef3c7; color: #92400e; }
+        .status-locked { background: #fecaca; color: #991b1b; }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 15px;
+            }
+            
+            .page-header {
+                padding: 20px;
+            }
+            
+            .stat-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="logo-container">
+                        <svg class="logo-img" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                            <!-- ExF Logo Recreation -->
+                            <defs>
+                                <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#dc2626"/>
+                                    <stop offset="100%" style="stop-color:#ef4444"/>
+                                </linearGradient>
+                                <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#1e40af"/>
+                                    <stop offset="100%" style="stop-color:#3b82f6"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Red oval background -->
+                            <ellipse cx="100" cy="40" rx="95" ry="35" fill="none" stroke="url(#redGradient)" stroke-width="3"/>
+                            
+                            <!-- Letter 'e' -->
+                            <text x="25" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#blueGradient)">e</text>
+                            
+                            <!-- Letter 'x' -->
+                            <text x="55" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#redGradient)">x</text>
+                            
+                            <!-- Letter 'f' -->
+                            <text x="85" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#blueGradient)">f</text>
+                            
+                            <!-- Small cube above 'x' -->
+                            <rect x="65" y="15" width="8" height="8" fill="url(#redGradient)"/>
+                        </svg>
+                        <h6 class="welcome-text">Welcome, Admin</h6>
+                    </div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shipments">
+                                <i class="bi bi-box-seam"></i> Shipments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/device-data">
+                                <i class="bi bi-graph-up"></i> Device Data
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/users">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+                <div class="page-header d-flex justify-content-between align-items-center">
+                    <h1 class="page-title">User Management</h1>
+                    <div class="btn-toolbar">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newUserModal">
+                                <i class="bi bi-person-plus"></i> New User
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="refreshUsers()">
+                                <i class="bi bi-arrow-clockwise"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-sm-6 mb-4">
+                        <div class="stat-card border-left-primary">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-primary">Total Users</div>
+                                    <div class="stat-number" id="totalUsers">0</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-people" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 mb-4">
+                        <div class="stat-card border-left-success">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-success">Active Users</div>
+                                    <div class="stat-number" id="activeUsers">0</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-person-check" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 mb-4">
+                        <div class="stat-card border-left-info">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-info">Operators</div>
+                                    <div class="stat-number" id="operatorUsers">0</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-gear" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6 mb-4">
+                        <div class="stat-card border-left-warning">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-warning">Locked Accounts</div>
+                                    <div class="stat-number" id="lockedAccounts">0</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-lock" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="bi bi-table me-2"></i>
+                        User Management
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="usersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Last Login</th>
+                                        <th>Created Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- User rows will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- New User Modal -->
+    <div class="modal fade" id="newUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New User</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="newUserForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Role</label>
+                            <select class="form-select" id="role" required>
+                                <option value="user">User</option>
+                                <option value="operator">Operator</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Initial Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="password" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="generatePassword()">
+                                    <i class="bi bi-magic"></i> Generate
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="createUser()">Create User</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="editUserForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="mb-3">
+                            <label for="editUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="editUsername" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editRole" class="form-label">Role</label>
+                            <select class="form-select" id="editRole" required>
+                                <option value="user">User</option>
+                                <option value="operator">Operator</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editStatus" class="form-label">Status</label>
+                            <select class="form-select" id="editStatus" required>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="locked">Locked</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="resetUserPassword()">Reset Password</button>
+                    <button type="button" class="btn btn-primary" onclick="updateUser()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="spinner-container" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Placeholder JavaScript functions (you'll need to implement these based on your backend)
+        function refreshUsers() {
+            console.log('Refreshing users...');
+            // Implement user refresh logic
+        }
+
+        function createUser() {
+            console.log('Creating user...');
+            // Implement user creation logic
+        }
+
+        function updateUser() {
+            console.log('Updating user...');
+            // Implement user update logic
+        }
+
+        function resetUserPassword() {
+            console.log('Resetting password...');
+            // Implement password reset logic
+        }
+
+        function generatePassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let password = '';
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('password').value = password;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load initial data
+            refreshUsers();
+        });
+    </script>
+</body>
+</html>

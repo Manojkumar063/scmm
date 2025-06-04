@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --light-gray: #f3f4f6;
+            --medium-gray: #e5e7eb;
+            --dark-gray: #6b7280;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 560px;
+            padding: 3rem;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0 0 2.5rem 0;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+        }
+
+        .info-box {
+            font-size: 1.125rem;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--medium-gray);
+            align-items: baseline;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 500;
+            color: var(--dark-gray);
+            width: 160px;
+            text-align: left;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            font-weight: 500;
+            text-align: left;
+            flex-grow: 1;
+            word-break: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem;
+                margin: 1rem;
+                border-radius: 12px;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+                margin-bottom: 2rem;
+            }
+            
+            .info-box {
+                font-size: 1rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                gap: 0.25rem;
+                padding: 1rem 0;
+            }
+            
+            .info-label {
+                width: 100%;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Account Profile</h2>
+        <div class="info-box">
+            <div class="info-item">
+                <span class="info-label">Full Name:</span>
+                <span class="info-value">{{ username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email Address:</span>
+                <span class="info-value">{{ email }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Account Role:</span>
+                <span class="info-value">{{ role }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Member Since:</span>
+                <span class="info-value">{{ join_date }}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
