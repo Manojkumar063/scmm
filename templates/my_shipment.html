@@ -12,25 +12,309 @@
   <style>
     body {
       background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    
     .sidebar {
       min-height: 100vh;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
     }
+    
+    .sidebar-content {
+      flex: 1;
+      padding: 1.5rem 0;
+    }
+    
+    .sidebar-footer {
+      padding: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: auto;
+    }
+    
+    .logo-section {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .logo-section img {
+      max-width: 120px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .welcome-text {
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      opacity: 0.9;
+    }
+    
+    .nav-link {
+      color: rgba(255,255,255,0.8) !important;
+      padding: 0.75rem 1.5rem;
+      margin: 0.25rem 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .nav-link:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: #ffffff !important;
+      transform: translateX(5px);
+    }
+    
     .nav-link.active {
-      background-color: #0d6efd;
-      font-weight: bold;
+      background-color: #ffffff;
+      color: #1e3c72 !important;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .card h4 {
+    
+    .nav-link i {
+      width: 20px;
+      margin-right: 0.75rem;
+    }
+    
+    .logout-btn {
+      background-color: rgba(220, 53, 69, 0.1);
+      border: 1px solid rgba(220, 53, 69, 0.3);
+      color: #ff6b6b !important;
+    }
+    
+    .logout-btn:hover {
+      background-color: #dc3545;
+      color: #ffffff !important;
+      transform: none;
+    }
+    
+    .main-content {
+      padding: 2rem;
+    }
+    
+    .page-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
       margin: 0;
     }
-    .modal-header, .modal-footer {
-      background-color: #f1f1f1;
+    
+    .btn-group-custom {
+      gap: 0.5rem;
     }
-    .modal-title {
-      font-weight: bold;
+    
+    .btn {
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
     }
-    .spinner-container {
-      z-index: 1050;
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .status-card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .status-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .status-card .card-body {
+      padding: 1.5rem;
+    }
+    
+    .status-card h4 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .status-card small {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+    
+    .status-card i {
+      opacity: 0.7;
+    }
+    
+    .table-card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-bottom: 1px solid #dee2e6;
+      padding: 1rem 1.5rem;
+      font-weight: 600;
+      color: #495057;
+    }
+    
+    .table {
+      margin: 0;
+    }
+    
+    .table th {
+      background-color: #f8f9fa;
+      font-weight: 700;
+      color: #495057;
+      border-top: none;
+      padding: 1rem 0.75rem;
+    }
+    
+    .table td {
+      padding: 0.75rem;
+      vertical-align: middle;
+    }
+    
+    .table-hover tbody tr:hover {
+      background-color: rgba(0,123,255,0.05);
+    }
+    
+    .modal-content {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .modal-footer {
+      background-color: #f8f9fa;
+      border-radius: 0 0 12px 12px;
+    }
+    
+    .form-control, .form-select {
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+      padding: 0.75rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .export-section {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .export-card {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      border-radius: 8px;
+      padding: 2px;
+    }
+    
+    .export-card .btn {
+      background: white;
+      border: none;
+      border-radius: 6px;
+      color: #28a745;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .export-card .btn:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .search-input {
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.95rem;
+      width: 200px;
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .search-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+    }
+    
+    .search-btn:hover {
+      background: linear-gradient(135deg, #5a6fd4 0%, #6a4192 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        z-index: 1000;
+        transition: left 0.3s ease;
+      }
+      
+      .sidebar.show {
+        left: 0;
+      }
+      
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .search-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-input {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -38,96 +322,88 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
-      <nav class="col-md-3 col-lg-2 d-md-block bg-dark text-white sidebar collapse">
-        <div class="position-sticky pt-3 text-center">
-          <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid mb-3" style="max-width: 150px;">
-          <h6 id="userRole">Welcome, User</h6>
-          <ul class="nav flex-column mt-4">
-            <li class="nav-item"><a class="nav-link text-white" href="/dashboard"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link active text-white" href="/shipments"><i class="bi bi-box-seam me-2"></i>Shipments</a></li>
-            <li class="nav-item"><a class="nav-link text-white" href="/device-data"><i class="bi bi-graph-up me-2"></i>Device Data</a></li>
-            <li class="nav-item" id="adminUsersLink" style="display: none;"><a class="nav-link text-white" href="/users"><i class="bi bi-people me-2"></i>Users</a></li>
+      <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+        <div class="sidebar-content">
+          <div class="logo-section">
+            <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
+            <div class="welcome-text">Welcome, {{ username }}</div>
+          </div>
+          
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="/dashboard">
+                <i class="bi bi-speedometer2"></i>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/shipments">
+                <i class="bi bi-box-seam"></i>Shipments
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/device-data">
+                <i class="bi bi-graph-up"></i>Device Data
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/new_shipment">
+                <i class="bi bi-truck"></i>New Shipment
+              </a>
+            </li>
+            {% if role == 'admin' %}
+            <li class="nav-item">
+              <a class="nav-link" href="/users">
+                <i class="bi bi-people"></i>Users
+              </a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="/my_account">
+                <i class="bi bi-person-circle"></i>My Account
+              </a>
+            </li>
           </ul>
+        </div>
+        
+        <div class="sidebar-footer">
+          <a class="nav-link logout-btn" href="/logout">
+            <i class="bi bi-box-arrow-right"></i>Logout
+          </a>
         </div>
       </nav>
 
       <!-- Main Content -->
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
         <div class="d-flex justify-content-between align-items-center py-4">
-          <h2 class="fw-bold">My Shipments</h2>
-          <div>
-            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newShipmentModal">
-              <i class="bi bi-plus-lg"></i> New Shipment
+          <h1 class="page-title text-dark fw-bold">My Shipments</h1>
+          <div class="d-flex gap-3 align-items-center">
+            <div class="search-container">
+              <input type="text" class="search-input" id="shipmentNumberSearch" placeholder="Search by Shipment Number">
+              <button class="btn search-btn" onclick="searchByShipmentNumber()">
+                <i class="bi bi-search me-2"></i>Search
+              </button>
+            </div>
+            <div class="export-card">
+              <a href="/shipments/export" class="btn btn-outline-success d-flex align-items-center">
+                <i class="bi bi-download me-2"></i>
+                <span>Export Data</span>
+              </a>
+            </div>
+            <button class="btn btn-primary" onclick="refreshShipments()">
+              <i class="bi bi-arrow-clockwise me-2"></i>Refresh
             </button>
-            <button class="btn btn-outline-secondary" onclick="refreshShipments()">
-              <i class="bi bi-arrow-clockwise"></i> Refresh
-            </button>
-          </div>
-        </div>
-                <div class="d-flex justify-content-end mb-3">
-                          <a href="/shipments/export" class="btn btn-success mb-3">
-                  <i class="bi bi-download"></i> Export Shipments as CSV
-                </a>
-
-        </div>
-
-        <!-- Status Cards -->
-        <div class="row g-4 mb-4">
-          <div class="col-md-3">
-            <div class="card text-white bg-primary shadow-sm">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
-                  <small>Total Shipments</small>
-                  <h4 id="totalShipments">2</h4>
-                </div>
-                <i class="bi bi-box-seam fs-2"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card text-white bg-info shadow-sm">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
-                  <small>In Transit</small>
-                  <h4 id="inTransitShipments">01</h4>
-                </div>
-                <i class="bi bi-truck fs-2"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card text-white bg-success shadow-sm">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
-                  <small>Delivered</small>
-                  <h4 id="deliveredShipments">0</h4>
-                </div>
-                <i class="bi bi-check-circle fs-2"></i>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card text-white bg-warning shadow-sm">
-              <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
-                  <small>Alerts</small>
-                  <h4 id="shipmentAlerts">1</h4>
-                </div>
-                <i class="bi bi-exclamation-triangle fs-2"></i>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- Shipment Table -->
-        <div class="card shadow-sm mb-4">
-          <div class="card-header bg-white fw-bold">
-            <i class="bi bi-table me-2"></i> Active Shipments
+        <div class="card table-card">
+          <div class="card-header">
+            <i class="bi bi-table me-2"></i>Active Shipments
           </div>
-          <div class="card-body">
+          <div class="card-body p-0">
             <div class="table-responsive">
-              <table class="table table-hover table-bordered align-middle" id="shipmentsTable">
-                <thead class="table-light">
+              <table class="table table-hover align-middle mb-0" id="shipmentsTable">
+                <thead>
                   <tr>
                     <th>Shipment Number</th>
                     <th>Route</th>
@@ -141,30 +417,30 @@
                     <th>Delivery Number</th>
                     <th>Batch ID</th>
                     <th>Description</th>
-                    <th>User Email</th>
+                    <th>User Account</th>
                     <th>Created At</th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for shipment in shipments %}
-                <tr>
-                  <td>{{ shipment.shipment_number }}</td>
-                  <td>{{ shipment.route }}</td>
-                  <td>{{ shipment.device_id }}</td>
-                  <td>{{ shipment.po_number }}</td>
-                  <td>{{ shipment.ndc_number }}</td>
-                  <td>{{ shipment.goods_number }}</td>
-                  <td>{{ shipment.container_number }}</td>
-                  <td>{{ shipment.goods_type }}</td>
-                  <td>{{ shipment.expected_delivery_date }}</td>
-                  <td>{{ shipment.delivery_number }}</td>
-                  <td>{{ shipment.batch_id }}</td>
-                  <td>{{ shipment.shipment_description }}</td>
-                  <td>{{ shipment.user_id }}</td>
-                  <td>{{ shipment.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
-                </tr>
-                {% endfor %}
-              </tbody>
+                  {% for shipment in shipments %}
+                  <tr>
+                    <td>{{ shipment.shipment_number }}</td>
+                    <td>{{ shipment.route }}</td>
+                    <td>{{ shipment.device_id }}</td>
+                    <td>{{ shipment.po_number }}</td>
+                    <td>{{ shipment.ndc_number }}</td>
+                    <td>{{ shipment.goods_number }}</td>
+                    <td>{{ shipment.container_number }}</td>
+                    <td>{{ shipment.goods_type }}</td>
+                    <td>{{ shipment.expected_delivery_date }}</td>
+                    <td>{{ shipment.delivery_number }}</td>
+                    <td>{{ shipment.batch_id }}</td>
+                    <td>{{ shipment.shipment_description }}</td>
+                    <td>{{ shipment.user_id }}</td>
+                    <td>{{ shipment.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
               </table>
             </div>
           </div>
@@ -180,7 +456,7 @@
         <form id="newShipmentForm">
           <div class="modal-header">
             <h5 class="modal-title">Create New Shipment</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -220,12 +496,40 @@
 
   <!-- Spinner -->
   <div class="spinner-container d-none position-fixed top-50 start-50 translate-middle">
-    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/static/js/my_shipment.js"></script>
   <script src="/static/js/security.js"></script>
-</body>
-</html>
+  <script>
+    function searchByShipmentNumber() {
+      const searchInput = document.getElementById('shipmentNumberSearch').value.trim().toLowerCase();
+      const table = document.getElementById('shipmentsTable');
+      const rows = table.getElementsByTagName('tr');
+
+      for (let i = 1; i < rows.length; i++) {
+        const shipmentNumberCell = rows[i].getElementsByTagName('td')[0]; // Shipment Number is in the 1st column (index 0)
+        if (shipmentNumberCell) {
+          const shipmentNumber = shipmentNumberCell.textContent.trim().toLowerCase();
+          rows[i].style.display = searchInput === '' || shipmentNumber.includes(searchInput) ? '' : 'none';
+        }
+      }
+    }
+
+    // Clear search input on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('shipmentNumberSearch').value = '';
+    });
+
+    // Allow Enter key to trigger search
+    document.getElementById('shipmentNumberSearch').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        searchByShipmentNumber();
+      }
+    });
+  </script>

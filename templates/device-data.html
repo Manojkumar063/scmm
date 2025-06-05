@@ -12,27 +12,91 @@
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         .sidebar {
             min-height: 100vh;
-            background-color: #343a40;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
+        
+        .sidebar-content {
+            flex: 1;
+            padding: 1.5rem 0;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
+        }
+        
+        .logo-section {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo-section img {
+            max-width: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-text {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
         .nav-link {
-            color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 5px;
-            margin-bottom: 5px;
+            color: rgba(255,255,255,0.8) !important;
+            padding: 0.75rem 1.5rem;
+            margin: 0.25rem 0.5rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
+        
         .nav-link:hover {
-            background-color: #495057;
-            color: #ffffff;
+            background-color: rgba(255,255,255,0.1);
+            color: #ffffff !important;
+            transform: translateX(5px);
         }
+        
         .nav-link.active {
-            background-color: #0d6efd;
-            color: #ffffff;
-            font-weight: bold;
+            background-color: #ffffff;
+            color: #1e3c72 !important;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        
+        .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
+        }
+        
+        .logout-btn {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b6b !important;
+        }
+        
+        .logout-btn:hover {
+            background-color: #dc3545;
+            color: #ffffff !important;
+            transform: none;
+        }
+        
+        .main-content {
+            padding: 2rem;
+        }
+        
         .border-left-primary {
             border-left: 4px solid #007bff !important;
         }
@@ -67,45 +131,82 @@
             transform: translate(-50%, -50%);
             z-index: 1050;
         }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 250px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.show {
+                left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <div class="text-center mb-4">
-                        <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid mb-3" style="max-width: 150px;">
-                        <h6 class="text-white" id="userRole">Welcome, User</h6>
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-content">
+                    <div class="logo-section">
+                        <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
+                        <div class="welcome-text">Welcome, User</div>
                     </div>
+                    
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">
-                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                <i class="bi bi-speedometer2"></i>Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/shipments">
-                                <i class="bi bi-box-seam me-2"></i> Shipments
+                                <i class="bi bi-box-seam"></i>Shipments
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="/device-data">
-                                <i class="bi bi-graph-up me-2"></i> Device Data
+                                <i class="bi bi-graph-up"></i>Device Data
                             </a>
                         </li>
-                        <li class="nav-item" id="adminUsersLink" style="display: none;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/new_shipment">
+                                <i class="bi bi-truck"></i>New Shipment
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/users">
-                                <i class="bi bi-people me-2"></i> Users
+                                <i class="bi bi-people"></i>Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my_account">
+                                <i class="bi bi-person-circle"></i>My Account
                             </a>
                         </li>
                     </ul>
                 </div>
+                
+                <div class="sidebar-footer">
+                    <a class="nav-link logout-btn" href="/logout">
+                        <i class="bi bi-box-arrow-right"></i>Logout
+                    </a>
+                </div>
             </nav>
 
             <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2 fw-bold">Device Data Stream</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">

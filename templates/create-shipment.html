@@ -44,64 +44,87 @@
         /* Sidebar Styles */
         .sidebar {
             min-height: 100vh;
-            background-color: var(--primary-color);
-            border-right: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-        }
-
-        .logo-container {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-        }
-
-        .logo-container img {
-            max-width: 80px;
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-        }
-
-        .welcome-text {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.75rem 1.5rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: none;
-            border-radius: 0;
-            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             display: flex;
-            align-items: center;
+            flex-direction: column;
         }
-
-        .nav-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.1);
+        
+        .sidebar-content {
+            flex: 1;
+            padding: 1.5rem 0;
         }
-
-        .nav-link.active {
-            background-color: var(--accent-color);
-            color: #ffffff;
-            font-weight: 600;
+        
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
         }
-
-        .nav-link i {
-            font-size: 1rem;
-            margin-right: 0.75rem;
-            width: 20px;
+        
+        .logo-section {
             text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
         }
-
+        
+        .logo-section img {
+            max-width: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-text {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            padding: 0.75rem 1.5rem;
+            margin: 0.25rem 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #ffffff !important;
+            transform: translateX(5px);
+        }
+        
+        .nav-link.active {
+            background-color: #ffffff;
+            color: #1e3c72 !important;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
+        }
+        
+        .logout-btn {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b6b !important;
+        }
+        
+        .logout-btn:hover {
+            background-color: #dc3545;
+            color: #ffffff !important;
+            transform: none;
+        }
+        
         /* Main Content */
         main {
             background-color: var(--light-bg);
             min-height: 100vh;
+            padding: 2rem;
         }
 
         .page-header {
@@ -343,14 +366,18 @@
                 position: fixed;
                 top: 0;
                 left: -100%;
-                width: 280px;
-                height: 100vh;
+                width: 250px;
                 z-index: 1000;
                 transition: left 0.3s ease;
             }
-
+            
             .sidebar.show {
                 left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
             }
 
             .page-header {
@@ -386,49 +413,56 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-0">
-                    <div class="logo-container">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-content">
+                    <div class="logo-section">
                         <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
-                        <p class="welcome-text" id="userRole">Supply Chain Management</p>
+                        <div class="welcome-text">Welcome, User</div>
                     </div>
+                    
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">
-                                <i class="bi bi-grid-3x3-gap-fill"></i>
-                                Dashboard
+                                <i class="bi bi-speedometer2"></i>Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/shipments">
-                                <i class="bi bi-box-seam"></i>
-                                Shipments
+                            <a class="nav-link" href="/shipments">
+                                <i class="bi bi-box-seam"></i>Shipments
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/device-data">
-                                <i class="bi bi-bar-chart-line"></i>
-                                Analytics
-                            </a>
-                        </li>
-                        <li class="nav-item" id="adminUsersLink" style="display: none;">
-                            <a class="nav-link" href="/users">
-                                <i class="bi bi-people"></i>
-                                Users
+                                <i class="bi bi-graph-up"></i>Device Data
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/settings">
-                                <i class="bi bi-gear"></i>
-                                Settings
+                            <a class="nav-link active" href="/new_shipment">
+                                <i class="bi bi-truck"></i>New Shipment
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i class="bi bi-people"></i>Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my_account">
+                                <i class="bi bi-person-circle"></i>My Account
                             </a>
                         </li>
                     </ul>
                 </div>
+                
+                <div class="sidebar-footer">
+                    <a class="nav-link logout-btn" href="/logout">
+                        <i class="bi bi-box-arrow-right"></i>Logout
+                    </a>
+                </div>
             </nav>
 
             <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
                 <div class="page-header">
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
@@ -451,139 +485,138 @@
                     <div class="card-body">
                         <form id="shipmentForm" onsubmit="return handleShipmentCreate(event)" class="needs-validation" novalidate action="/new_shipment" method="post">
 
-    <!-- Shipment Details Section -->
-    <div class="form-section">
-        <h3 class="section-title">
-            <i class="bi bi-box-seam"></i>
-            Shipment Details
-        </h3>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <label for="shipmentNumber" class="form-label">Shipment Number</label>
-                <input type="text" class="form-control" id="shipmentNumber" name="shipmentNumber"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter shipment number">
-                <div class="form-text">Unique identifier for this shipment</div>
-                <div class="invalid-feedback">Please enter a valid shipment number (3-50 characters)</div>
-            </div>
+                            <!-- Shipment Details Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-box-seam"></i>
+                                    Shipment Details
+                                </h3>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label for="shipmentNumber" class="form-label">Shipment Number</label>
+                                        <input type="text" class="form-control" id="shipmentNumber" name="shipmentNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter shipment number">
+                                        <div class="form-text">Unique identifier for this shipment</div>
+                                        <div class="invalid-feedback">Please enter a valid shipment number (3-50 characters)</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="containerNumber" class="form-label">Container Number</label>
-                <input type="text" class="form-control" id="containerNumber" name="containerNumber"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter container number">
-                <div class="form-text">Physical container identification</div>
-                <div class="invalid-feedback">Please enter a valid container number</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="containerNumber" class="form-label">Container Number</label>
+                                        <input type="text" class="form-control" id="containerNumber" name="containerNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter container number">
+                                        <div class="form-text">Physical container identification</div>
+                                        <div class="invalid-feedback">Please enter a valid container number</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="goodsType" class="form-label">Goods Type</label>
-                <input type="text" class="form-control" id="goodsType" name="goodsType"
-                       required minlength="2" maxlength="100" placeholder="Enter goods type">
-                <div class="invalid-feedback">Please enter a valid goods type (2-100 characters)</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="goodsType" class="form-label">Goods Type</label>
+                                        <input type="text" class="form-control" id="goodsType" name="goodsType"
+                                               required minlength="2" maxlength="100" placeholder="Enter goods type">
+                                        <div class="invalid-feedback">Please enter a valid goods type (2-100 characters)</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="expectedDeliveryDate" class="form-label">Expected Delivery</label>
-                <input type="datetime-local" class="form-control" id="expectedDeliveryDate" name="expectedDeliveryDate"
-                       required>
-                <div class="invalid-feedback">Please select a valid delivery date</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="expectedDeliveryDate" class="form-label">Expected Delivery</label>
+                                        <input type="datetime-local" class="form-control" id="expectedDeliveryDate" name="expectedDeliveryDate"
+                                               required>
+                                        <div class="invalid-feedback">Please select a valid delivery date</div>
+                                    </div>
 
-            <div class="col-12">
-                <label for="routeDetails" class="form-label">Route Information</label>
-                <textarea class="form-control" id="routeDetails" name="routeDetails"
-                          required minlength="5" maxlength="200" rows="3"
-                          placeholder="Enter detailed route information including origin, destination, and key waypoints"></textarea>
-                <div class="form-text">Detailed route from origin to destination</div>
-                <div class="invalid-feedback">Please enter route details (5-200 characters)</div>
-            </div>
-        </div>
-    </div>
+                                    <div class="col-12">
+                                        <label for="routeDetails" class="form-label">Route Information</label>
+                                        <textarea class="form-control" id="routeDetails" name="routeDetails"
+                                                  required minlength="5" maxlength="200" rows="3"
+                                                  placeholder="Enter detailed route information including origin, destination, and key waypoints"></textarea>
+                                        <div class="form-text">Detailed route from origin to destination</div>
+                                        <div class="invalid-feedback">Please enter route details (5-200 characters)</div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Tracking & Identification Section -->
-    <div class="form-section">
-        <h3 class="section-title">
-            <i class="bi bi-qr-code-scan"></i>
-            Tracking & Identification
-        </h3>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <label for="deviceId" class="form-label">Device ID</label>
-                <input type="text" class="form-control" id="deviceId" name="deviceId"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter device ID">
-                <div class="form-text">IoT tracking device identifier</div>
-                <div class="invalid-feedback">Please enter a valid device ID</div>
-            </div>
+                            <!-- Tracking & Identification Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-qr-code-scan"></i>
+                                    Tracking & Identification
+                                </h3>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label for="deviceId" class="form-label">Device ID</label>
+                                        <input type="text" class="form-control" id="deviceId" name="deviceId"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter device ID">
+                                        <div class="form-text">IoT tracking device identifier</div>
+                                        <div class="invalid-feedback">Please enter a valid device ID</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="poNumber" class="form-label">Purchase Order</label>
-                <input type="text" class="form-control" id="poNumber" name="poNumber"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter PO number">
-                <div class="form-text">Related purchase order number</div>
-                <div class="invalid-feedback">Please enter a valid PO number</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="poNumber" class="form-label">Purchase Order</label>
+                                        <input type="text" class="form-control" id="poNumber" name="poNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter PO number">
+                                        <div class="form-text">Related purchase order number</div>
+                                        <div class="invalid-feedback">Please enter a valid PO number</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="ndcNumber" class="form-label">NDC Number</label>
-                <input type="text" class="form-control" id="ndcNumber" name="ndcNumber"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter NDC number">
-                <div class="form-text">National Drug Code identification</div>
-                <div class="invalid-feedback">Please enter a valid NDC number</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="ndcNumber" class="form-label">NDC Number</label>
+                                        <input type="text" class="form-control" id="ndcNumber" name="ndcNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter NDC number">
+                                        <div class="form-text">National Drug Code identification</div>
+                                        <div class="invalid-feedback">Please enter a valid NDC number</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="serialNumberOfGoods" class="form-label">Serial Number</label>
-                <input type="text" class="form-control" id="serialNumberOfGoods" name="serialNumberOfGoods"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter serial number">
-                <div class="form-text">Goods serial number</div>
-                <div class="invalid-feedback">Please enter a valid serial number</div>
-            </div>
-        </div>
-    </div>
+                                    <div class="col-md-6">
+                                        <label for="serialNumberOfGoods" class="form-label">Serial Number</label>
+                                        <input type="text" class="form-control" id="serialNumberOfGoods" name="serialNumberOfGoods"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter serial number">
+                                        <div class="form-text">Goods serial number</div>
+                                        <div class="invalid-feedback">Please enter a valid serial number</div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Delivery & Batch Information Section -->
-    <div class="form-section">
-        <h3 class="section-title">
-            <i class="bi bi-truck"></i>
-            Delivery & Batch Information
-        </h3>
-        <div class="row g-4">
-            <div class="col-md-6">
-                <label for="deliveryNumber" class="form-label">Delivery Number</label>
-                <input type="text" class="form-control" id="deliveryNumber" name="deliveryNumber"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter delivery number">
-                <div class="form-text">Delivery reference number</div>
-                <div class="invalid-feedback">Please enter a valid delivery number</div>
-            </div>
+                            <!-- Delivery & Batch Information Section -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-truck"></i>
+                                    Delivery & Batch Information
+                                </h3>
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label for="deliveryNumber" class="form-label">Delivery Number</label>
+                                        <input type="text" class="form-control" id="deliveryNumber" name="deliveryNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter delivery number">
+                                        <div class="form-text">Delivery reference number</div>
+                                        <div class="invalid-feedback">Please enter a valid delivery number</div>
+                                    </div>
 
-            <div class="col-md-6">
-                <label for="batchId" class="form-label">Batch ID</label>
-                <input type="text" class="form-control" id="batchId" name="batchId"
-                       required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter batch ID">
-                <div class="form-text">Production batch identifier</div>
-                <div class="invalid-feedback">Please enter a valid batch ID</div>
-            </div>
+                                    <div class="col-md-6">
+                                        <label for="batchId" class="form-label">Batch ID</label>
+                                        <input type="text" class="form-control" id="batchId" name="batchId"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter batch ID">
+                                        <div class="form-text">Production batch identifier</div>
+                                        <div class="invalid-feedback">Please enter a valid batch ID</div>
+                                    </div>
 
-            <div class="col-12">
-                <label for="shipmentDescription" class="form-label">Additional Notes</label>
-                <textarea class="form-control" id="shipmentDescription" name="shipmentDescription"
-                          maxlength="500" rows="4" placeholder="Enter any additional information about this shipment (optional)"></textarea>
-                <div class="form-text">Optional additional details or special instructions</div>
-                <div class="invalid-feedback">Please keep the description under 500 characters</div>
-            </div>
-        </div>
-    </div>
+                                    <div class="col-12">
+                                        <label for="shipmentDescription" class="form-label">Additional Notes</label>
+                                        <textarea class="form-control" id="shipmentDescription" name="shipmentDescription"
+                                                  maxlength="500" rows="4" placeholder="Enter any additional information about this shipment (optional)"></textarea>
+                                        <div class="form-text">Optional additional details or special instructions</div>
+                                        <div class="invalid-feedback">Please keep the description under 500 characters</div>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Form Actions -->
-    <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
-        <a href="/shipments" class="btn btn-secondary">
-            <i class="bi bi-x-lg me-2"></i>Cancel
-        </a>
-        <button type="submit" class="btn btn-primary">
-            <i class="bi bi-check-lg me-2"></i>Create Shipment
-        </button>
-    </div>
-</form>
-
+                            <!-- Form Actions -->
+                            <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
+                                <a href="/shipments" class="btn btn-secondary">
+                                    <i class="bi bi-x-lg me-2"></i>Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-lg me-2"></i>Create Shipment
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </main>

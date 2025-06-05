@@ -6,199 +6,175 @@
     <title>SCM Expert - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet"/>
+    <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+
     <style>
-        :root {
-            --primary-color: #1e3a8a;
-            --secondary-color: #dc2626;
-            --sidebar-bg: #1f2937;
-            --sidebar-text: #e5e7eb;
-            --accent-color: #3b82f6;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8fafc;
-            line-height: 1.6;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         .sidebar {
-            background: linear-gradient(135deg, var(--sidebar-bg) 0%, #374151 100%);
             min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
         }
-
-        .sidebar .nav-link {
-            color: var(--sidebar-text);
-            padding: 12px 20px;
-            margin: 4px 8px;
+        
+        .sidebar-content {
+            flex: 1;
+            padding: 1.5rem 0;
+        }
+        
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
+        }
+        
+        .logo-section {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo-section img {
+            max-width: 120px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-text {
+            color: #ffffff;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            padding: 0.75rem 1.5rem;
+            margin: 0.25rem 0.5rem;
             border-radius: 8px;
             transition: all 0.3s ease;
             font-weight: 500;
         }
-
-        .sidebar .nav-link:hover {
-            background: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
-            transform: translateX(4px);
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #ffffff !important;
+            transform: translateX(5px);
         }
-
-        .sidebar .nav-link.active {
-            background: linear-gradient(135deg, var(--accent-color), #2563eb);
-            color: white;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        
+        .nav-link.active {
+            background-color: #ffffff;
+            color: #1e3c72 !important;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        .logo-container {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 20px;
+        
+        .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
         }
-
-        .logo-img {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 10px;
-            filter: brightness(1.1);
+        
+        .logout-btn {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b6b !important;
         }
-
-        .welcome-text {
-            color: var(--sidebar-text);
-            font-size: 0.9rem;
-            font-weight: 500;
+        
+        .logout-btn:hover {
+            background-color: #dc3545;
+            color: #ffffff !important;
+            transform: none;
         }
-
+        
         .main-content {
-            padding: 30px;
+            padding: 2rem;
         }
-
+        
         .page-header {
-            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            padding: 25px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border-left: 4px solid var(--accent-color);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
+        
         .page-title {
-            color: var(--primary-color);
+            font-size: 2rem;
             font-weight: 700;
             margin: 0;
+        }
+        
+        .btn-group-custom {
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .welcome-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 3rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .welcome-icon {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-title {
             font-size: 2rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), #2563eb);
-            border: none;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-        }
-
-        .btn-outline-primary {
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: none;
-            height: 100%;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-
-        .border-left-primary { border-left: 4px solid var(--accent-color) !important; }
-        .border-left-success { border-left: 4px solid #10b981 !important; }
-        .border-left-info { border-left: 4px solid #06b6d4 !important; }
-        .border-left-warning { border-left: 4px solid #f59e0b !important; }
-
-        .stat-number {
-            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #1e3c72;
+            margin-bottom: 1rem;
         }
-
-        .stat-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+        
+        .welcome-text {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 0;
         }
-
-        .text-primary { color: var(--accent-color) !important; }
-        .text-success { color: #10b981 !important; }
-        .text-info { color: #06b6d4 !important; }
-        .text-warning { color: #f59e0b !important; }
-
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
-            color: white;
-            font-weight: 600;
-            padding: 18px 25px;
-            border: none;
-        }
-
-        .table th {
-            background: #f8fafc;
-            color: var(--primary-color);
-            font-weight: 600;
-            border: none;
-            padding: 15px;
-            font-size: 0.9rem;
-        }
-
-        .table td {
-            padding: 15px;
-            vertical-align: middle;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .status-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .status-active { background: #dcfce7; color: #166534; }
-        .status-warning { background: #fef3c7; color: #92400e; }
-        .status-error { background: #fecaca; color: #991b1b; }
-        .status-info { background: #dbeafe; color: #1e40af; }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            padding: 20px;
-        }
-
-        .spinner-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 250px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+            
+            .sidebar.show {
+                left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -206,337 +182,74 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <div class="logo-container">
-                        <svg class="logo-img" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-                            <defs>
-                                <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#dc2626"/>
-                                    <stop offset="100%" style="stop-color:#ef4444"/>
-                                </linearGradient>
-                                <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#1e40af"/>
-                                    <stop offset="100%" style="stop-color:#3b82f6"/>
-                                </linearGradient>
-                            </defs>
-                            <ellipse cx="100" cy="40" rx="95" ry="35" fill="none" stroke="url(#redGradient)" stroke-width="3"/>
-                            <text x="25" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#blueGradient)">e</text>
-                            <text x="55" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#redGradient)">x</text>
-                            <text x="85" y="50" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#blueGradient)">f</text>
-                            <rect x="65" y="15" width="8" height="8" fill="url(#redGradient)"/>
-                        </svg>
-                        <h6 class="welcome-text">Welcome, User</h6>
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="sidebar-content">
+                    <div class="logo-section">
+                        <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
+                        <div class="welcome-text">Welcome, User</div>
                     </div>
+                    
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="/dashboard">
-                                <i class="bi bi-speedometer2"></i> Dashboard
+                                <i class="bi bi-speedometer2"></i>Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/shipments">
-                                <i class="bi bi-box-seam"></i> Shipments
+                                <i class="bi bi-box-seam"></i>Shipments
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/device-data">
-                                <i class="bi bi-graph-up"></i> Device Data
+                                <i class="bi bi-graph-up"></i>Device Data
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/new_shipment">
-                                <i class="bi bi-truck"></i> New Shipment
+                                <i class="bi bi-truck"></i>New Shipment
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/users">
-                                <i class="bi bi-people"></i> Users
-                                
+                                <i class="bi bi-people"></i>Users
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/my_account">
-                                
-                                <i class="bi bi-person-circle"></i> My Account
-                            </a>
-                        </li>
-                        <li class="nav-item-bottom" style="margin-top: 650px;">
-                            <a class="nav-link" href="/logout">
-                                <i class="bi bi-box-arrow-right"></i> Logout
+                                <i class="bi bi-person-circle"></i>My Account
                             </a>
                         </li>
                     </ul>
                 </div>
+                
+                <div class="sidebar-footer">
+                    <a class="nav-link logout-btn" href="/logout">
+                        <i class="bi bi-box-arrow-right"></i>Logout
+                    </a>
+                </div>
             </nav>
 
-            <!-- Main content -->
+            <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
                 <div class="page-header d-flex justify-content-between align-items-center">
                     <h1 class="page-title">Dashboard</h1>
-                    <div class="btn-toolbar">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-outline-primary" onclick="refreshDashboard()">
-                                <i class="bi bi-arrow-clockwise"></i> Refresh
-                            </button>
-                        </div>
-                    </div>
+                    
                 </div>
 
-                <!-- Statistics Cards -->
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-sm-6 mb-4">
-                        <div class="stat-card border-left-primary">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1">
-                                    <div class="stat-label text-primary">Active Shipments</div>
-                                    <div class="stat-number" id="activeShipments">{{ count }}</div>
-                                </div>
-                                <div class="ms-3">
-                                    <i class="bi bi-box-seam" style="font-size: 2.5rem; color: #e2e8f0;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-sm-6 mb-4">
-                        <div class="stat-card border-left-success">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1">
-                                    <div class="stat-label text-success">Connected Devices</div>
-                                    <div class="stat-number" id="connectedDevices">87</div>
-                                </div>
-                                <div class="ms-3">
-                                    <i class="bi bi-cpu" style="font-size: 2.5rem; color: #e2e8f0;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-sm-6 mb-4">
-                        <div class="stat-card border-left-warning">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1">
-                                    <div class="stat-label text-warning">Alerts</div>
-                                    <div class="stat-number" id="activeAlerts">3</div>
-                                </div>
-                                <div class="ms-3">
-                                    <i class="bi bi-exclamation-triangle" style="font-size: 2.5rem; color: #e2e8f0;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-3 col-sm-6 mb-4">
-                        <div class="stat-card border-left-info">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1">
-                                    <div class="stat-label text-info">Completed Shipments</div>
-                                    <div class="stat-number" id="completedShipments">156</div>
-                                </div>
-                                <div class="ms-3">
-                                    <i class="bi bi-check-circle" style="font-size: 2.5rem; color: #e2e8f0;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Row -->
-                <div class="row mb-4">
-                    <div class="col-xl-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <i class="bi bi-graph-up me-2"></i>
-                                Shipment Status Distribution
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="shipmentStatusChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <i class="bi bi-thermometer me-2"></i>
-                                Device Temperature Overview
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="temperatureOverviewChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity Table -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="bi bi-clock-history me-2"></i>
-                        Recent Activity
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-hover" id="recentActivityTable">
-                                <thead>
-                                    <tr>
-                                        <th>Timestamp</th>
-                                        <th>Type</th>
-                                        <th>Description</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>2025-05-30 14:32:15</td>
-                                        <td><i class="bi bi-box-seam text-primary"></i> Shipment</td>
-                                        <td>New shipment SH-2025-001 created</td>
-                                        <td><span class="status-badge status-info">Active</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-05-30 14:28:42</td>
-                                        <td><i class="bi bi-thermometer text-warning"></i> Temperature</td>
-                                        <td>Temperature alert for device DEV-087</td>
-                                        <td><span class="status-badge status-warning">Warning</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-05-30 14:15:33</td>
-                                        <td><i class="bi bi-check-circle text-success"></i> Delivery</td>
-                                        <td>Shipment SH-2025-098 delivered successfully</td>
-                                        <td><span class="status-badge status-active">Completed</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-05-30 13:45:17</td>
-                                        <td><i class="bi bi-cpu text-info"></i> Device</td>
-                                        <td>Device DEV-045 came online</td>
-                                        <td><span class="status-badge status-active">Online</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2025-05-30 13:22:08</td>
-                                        <td><i class="bi bi-exclamation-triangle text-danger"></i> Alert</td>
-                                        <td>Humidity threshold exceeded for SH-2025-086</td>
-                                        <td><span class="status-badge status-error">Critical</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <!-- Welcome Section -->
+                <div class="welcome-card">
+                    <i class="bi bi-house-door welcome-icon"></i>
+                    <h2 class="welcome-title">Welcome to SCM Expert Dashboard</h2>
+                    <p class="welcome-text">Your central hub for supply chain management and shipment tracking.</p>
                 </div>
             </main>
         </div>
     </div>
 
-    <!-- Loading Spinner -->
-    <div class="spinner-container" style="display: none;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Initialize Charts
-        function initializeCharts() {
-            // Shipment Status Chart
-            const shipmentCtx = document.getElementById('shipmentStatusChart').getContext('2d');
-            new Chart(shipmentCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['In Transit', 'Delivered', 'Pending', 'Delayed'],
-                    datasets: [{
-                        data: [45, 35, 15, 5],
-                        backgroundColor: [
-                            '#3b82f6',
-                            '#10b981',
-                            '#f59e0b',
-                            '#ef4444'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Temperature Overview Chart
-            const tempCtx = document.getElementById('temperatureOverviewChart').getContext('2d');
-            new Chart(tempCtx, {
-                type: 'line',
-                data: {
-                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-                    datasets: [{
-                        label: 'Average Temperature (°C)',
-                        data: [22, 21, 23, 25, 27, 24],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        borderWidth: 3,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            min: 15,
-                            max: 30,
-                            grid: {
-                                color: '#e2e8f0'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: '#e2e8f0'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Refresh Dashboard Function
-        function refreshDashboard() {
-            console.log('Refreshing dashboard...');
-            document.querySelector('.spinner-container').style.display = 'flex';
-            
-            setTimeout(() => {
-                document.getElementById('activeShipments').textContent = Math.floor(Math.random() * 50) + 20;
-                document.getElementById('connectedDevices').textContent = Math.floor(Math.random() * 30) + 70;
-                document.getElementById('activeAlerts').textContent = Math.floor(Math.random() * 10);
-                document.getElementById('completedShipments').textContent = Math.floor(Math.random() * 50) + 150;
-                
-                document.querySelector('.spinner-container').style.display = 'none';
-            }, 1500);
-        }
-
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeCharts();
-            setInterval(refreshDashboard, 300000);
-        });
-    </script>
+    <script src="/static/js/security.js"></script>
+   
 </body>
 </html>
