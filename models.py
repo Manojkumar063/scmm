@@ -31,7 +31,7 @@ class Shipment(BaseModel):
     delivery_number: str = Field(..., min_length=1, max_length=50)
     ndc_number: str = Field(..., min_length=1, max_length=50)
     batch_id: str = Field(..., min_length=1, max_length=50)
-    shipment_description: str = Field(..., min_length=1, max_length=500)
+    shipment_description: Optional[str] = Field(default=None, max_length=500)
     user_id: EmailStr
     created_at: datetime = Field(default_factory=datetime.now)
     status: str = Field(default="pending")

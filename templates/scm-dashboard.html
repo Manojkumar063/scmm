@@ -6,15 +6,25 @@
     <title>SCM Expert - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="/static/css/style.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
 
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
         }
-        
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
         .sidebar {
             min-height: 100vh;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -39,19 +49,23 @@
             padding: 2rem 1rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.95); /* Added white background for contrast */
+            border-radius: 12px; /* Rounded corners for logo container */
+            margin: 1rem; /* Margin to separate from sidebar edges */
         }
-        
+
         .logo-section img {
-            max-width: 120px;
+            max-width: 120px; /* Increased size for visibility */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 8px; /* Added padding for space around logo */
+            background-color: transparent; /* Preserve logo transparency */
         }
-        
+
         .welcome-text {
-            color: #ffffff;
+            color: #1e3a8a; /* Changed to dark color for contrast on white background */
             font-size: 0.9rem;
             margin-top: 1rem;
-            opacity: 0.9;
+            opacity: 0.85;
         }
         
         .nav-link {
@@ -96,7 +110,7 @@
         .main-content {
             padding: 2rem;
         }
-        
+
         .page-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -105,29 +119,46 @@
             margin-bottom: 2rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
+
         .page-title {
             font-size: 2rem;
             font-weight: 700;
             margin: 0;
         }
-        
+
         .btn-group-custom {
             gap: 0.5rem;
         }
-        
+
         .btn {
             border-radius: 8px;
             font-weight: 500;
             padding: 0.5rem 1rem;
             transition: all 0.3s ease;
         }
-        
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-        
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), #2563eb);
+            border: none;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline-light {
+            border: 2px solid rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn-outline-light:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
         .welcome-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border: none;
@@ -135,28 +166,178 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             padding: 3rem;
             text-align: center;
-            margin-top: 2rem;
+            margin-bottom: 2rem;
         }
-        
+
         .welcome-icon {
             font-size: 4rem;
             color: #667eea;
             margin-bottom: 1rem;
         }
-        
+
         .welcome-title {
             font-size: 2rem;
             font-weight: 700;
             color: #1e3c72;
             margin-bottom: 1rem;
         }
-        
-        .welcome-text {
-            font-size: 1.1rem;
-            color: #6c757d;
-            margin-bottom: 0;
+
+       .welcome-text {
+            color: #1e3a8a; /* Changed to dark color for contrast on white background */
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.85;
         }
-        
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .border-left-primary { border-left: 4px solid var(--accent-color) !important; }
+        .border-left-success { border-left: 4px solid var(--success-color) !important; }
+        .border-left-info { border-left: 4px solid var(--info-color) !important; }
+        .border-left-warning { border-left: 4px solid var(--warning-color) !important; }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .text-primary { color: var(--accent-color) !important; }
+        .text-success { color: var(--success-color) !important; }
+        .text-info { color: var(--info-color) !important; }
+        .text-warning { color: var(--warning-color) !important; }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            font-weight: 600;
+            padding: 18px 25px;
+            border: none;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .recent-activity {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e9ecef;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-description {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+        }
+
+        .status-active { background-color: var(--success-color); }
+        .status-pending { background-color: var(--warning-color); }
+        .status-delayed { background-color: var(--secondary-color); }
+        .status-delivered { background-color: var(--info-color); }
+
+        .progress-bar-custom {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e9ecef;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--success-color));
+            transition: width 1s ease-in-out;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -166,75 +347,117 @@
                 z-index: 1000;
                 transition: left 0.3s ease;
             }
-            
+
             .sidebar.show {
                 left: 0;
             }
-            
+
             .main-content {
                 margin-left: 0;
                 padding: 1rem;
+            }
+
+            .page-header {
+                padding: 1.5rem;
+            }
+
+            .welcome-card {
+                padding: 2rem;
+            }
+
+            .chart-container {
+                height: 250px;
+            }
+        }
+
+        .mobile-menu-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="bi bi-list"></i>
+    </button>
+
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar" id="sidebar">
                 <div class="sidebar-content">
                     <div class="logo-section">
                         <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
-                        <div class="welcome-text">Welcome, User</div>
+                        <div class="welcome-text">Welcome, {{ username }}</div>
                     </div>
-                    
+
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="/dashboard">
-                                <i class="bi bi-speedometer2"></i>Dashboard
+                                <i class="bi bi-speedometer2"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/shipments">
-                                <i class="bi bi-box-seam"></i>Shipments
+                                <i class="bi bi-box-seam"></i> Shipments
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/device-data">
-                                <i class="bi bi-graph-up"></i>Device Data
+                                <i class="bi bi-graph-up"></i> Device Data
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/new_shipment">
-                                <i class="bi bi-truck"></i>New Shipment
+                                <i class="bi bi-truck"></i> New Shipment
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/users">
-                                <i class="bi bi-people"></i>Users
+                                <i class="bi bi-people"></i> Users
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/my_account">
-                                <i class="bi bi-person-circle"></i>My Account
+                                <i class="bi bi-person-circle"></i> My Account
                             </a>
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="sidebar-footer">
                     <a class="nav-link logout-btn" href="/logout">
-                        <i class="bi bi-box-arrow-right"></i>Logout
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </div>
             </nav>
 
             <!-- Main Content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
-                <div class="page-header d-flex justify-content-between align-items-center">
-                    <h1 class="page-title">Dashboard</h1>
-                    
+                <div class="page-header d-flex justify-content-between align-items-center flex-wrap">
+                    <h1 class="page-title">SCM Expert Dashboard</h1>
+                    <div class="btn-group btn-group-custom">
+                        <a href="/new_shipment" class="btn btn-primary">
+                            <i class="bi bi-truck"></i> New Shipment
+                        </a>
+                        <a href="/device-data" class="btn btn-outline-light">
+                            <i class="bi bi-graph-up"></i> Device Data
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Welcome Section -->
@@ -243,13 +466,351 @@
                     <h2 class="welcome-title">Welcome to SCM Expert Dashboard</h2>
                     <p class="welcome-text">Your central hub for supply chain management and shipment tracking.</p>
                 </div>
+
+                <!-- Dashboard Statistics Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="stat-card border-left-primary">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-primary">Active Shipments</div>
+                                    <div class="stat-number" id="activeShipments">142</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-box seamex-seam" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="stat-card border-left-success">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-success">Devices Online</div>
+                                    <div class="stat-number" id="devicesOnline">89</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-wifi" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="stat-card border-left-info">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-info">Active Users</div>
+                                    <div class="stat-number" id="activeUsers">23</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-people" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6">
+                        <div class="stat-card border-left-warning">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <div class="stat-label text-warning">Alerts</div>
+                                    <div class="stat-number" id="alertsCount">7</div>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="bi bi-exclamation-triangle" style="font-size: 2.5rem; color: #e2e8f0;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-pie-chart me-2"></i>
+                                Shipment Status Distribution
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="shipmentStatusChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-bar-chart me-2"></i>
+                                Monthly Shipments
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="monthlyShipmentsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity and Performance -->
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-clock-history me-2"></i>
+                                Recent Activity
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="recent-activity">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary text-white">
+                                            <i class="bi bi-truck"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">New Shipment Created</div>
+                                            <div class="activity-description">Shipment #SH-2024-001 to New York</div>
+                                            <div class="activity-time">2 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success text-white">
+                                            <i class="bi bi-check-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Shipment Delivered</div>
+                                            <div class="activity-description">Shipment #SH-2024-003 delivered successfully</div>
+                                            <div class="activity-time">15 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning text-white">
+                                            <i class="bi bi-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Temperature Alert</div>
+                                            <div class="activity-description">High temperature detected in shipment #SH-2024-002</div>
+                                            <div class="activity-time">1 hour ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-info text-white">
+                                            <i class="bi bi-person-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">New User Registered</div>
+                                            <div class="activity-description">john.doe@example.com joined the system</div>
+                                            <div class="activity-time">2 hours ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-secondary text-white">
+                                            <i class="bi bi-gear"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">System Maintenance</div>
+                                            <div class="activity-description">Scheduled maintenance completed</div>
+                                            <div class="activity-time">3 hours ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="bi bi-speedometer2 me-2"></i>
+                                System Performance
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">CPU Usage</span>
+                                        <span class="text-muted">67%</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill" style="width: 67%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Memory Usage</span>
+                                        <span class="text-muted">84%</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill" style="width: 84%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Storage Usage</span>
+                                        <span class="text-muted">45%</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill" style="width: 45%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="fw-semibold">Network Traffic</span>
+                                        <span class="text-muted">32%</span>
+                                    </div>
+                                    <div class="progress-bar-custom">
+                                        <div class="progress-fill" style="width: 32%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/security.js"></script>
-   
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !menuBtn.contains(event.target) && 
+                sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+        });
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Shipment Status Doughnut Chart
+            const shipmentCtx = document.getElementById('shipmentStatusChart').getContext('2d');
+            new Chart(shipmentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['In Transit', 'Delivered', 'Pending', 'Delayed'],
+                    datasets: [{
+                        data: [65, 45, 20, 12],
+                        backgroundColor: ['#667eea', '#10b981', '#f59e0b', '#dc2626'],
+                        borderColor: ['#ffffff', '#ffffff', '#ffffff', '#ffffff'],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#1e3c72',
+                                font: {
+                                    size: 12,
+                                    weight: '500'
+                                },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            // Monthly Shipments Bar Chart
+            const monthlyCtx = document.getElementById('monthlyShipmentsChart').getContext('2d');
+            new Chart(monthlyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Shipments',
+                        data: [120, 135, 110, 165, 142, 180],
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: '#667eea',
+                        borderWidth: 2,
+                        borderRadius: 6,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            },
+                            ticks: {
+                                color: '#6c757d'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#6c757d'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animate stat numbers
+            animateNumbers();
+        });
+
+        // Animate numbers function
+        function animateNumbers() {
+            const numbers = document.querySelectorAll('.stat-number');
+            numbers.forEach(num => {
+                const finalVal = parseInt(num.textContent);
+                let currentVal = 0;
+                const increment = finalVal / 50;
+                
+                const timer = setInterval(() => {
+                    currentVal += increment;
+                    if (currentVal >= finalVal) {
+                        num.textContent = finalVal;
+                        clearInterval(timer);
+                    } else {
+                        num.textContent = Math.floor(currentVal);
+                    }
+                }, 30);
+            });
+        }
+
+        // Real-time updates simulation
+        setInterval(() => {
+            const onlineDevices = document.getElementById('devicesOnline');
+            const currentVal = parseInt(onlineDevices.textContent);
+            const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+            const newVal = Math.max(85, Math.min(95, currentVal + change));
+            onlineDevices.textContent = newVal;
+        }, 5000);
+    </script>
 </body>
 </html>

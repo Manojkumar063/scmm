@@ -3,7 +3,8 @@ from fastapi.templating import Jinja2Templates
 from database import users_data, shipment_data
 from datetime import datetime
 import logging
-from typing import Dict
+from typing import Dict,Optional
+
 
 from .jwt_handler import get_current_user
 from .cookie_handler import delete_access_token_cookie
@@ -69,7 +70,7 @@ async def create_shipment_post(
     expectedDeliveryDate: str = Form(..., description="Expected delivery date"),
     deliveryNumber: str = Form(..., description="Unique delivery number"),
     batchId: str = Form(..., description="Batch ID"),
-    shipmentDescription: str = Form(..., description="Shipment description")
+    shipmentDescription: Optional[str] = Form(None, description="Shipment description (optional)")
 ):
     """Create new shipment with validation."""
     try:
@@ -124,7 +125,7 @@ async def create_shipment_post(
             expected_delivery_date=expectedDeliveryDate,
             delivery_number=deliveryNumber,
             batch_id=batchId,
-            shipment_description=shipmentDescription.strip(),
+            shipment_description=shipmentDescription.strip() if shipmentDescription else None,
             user_id=user_email,
             created_at=datetime.now()
         )

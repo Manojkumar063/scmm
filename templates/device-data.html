@@ -34,25 +34,29 @@
             margin-top: auto;
         }
         
-        .logo-section {
-            text-align: center;
-            padding: 2rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .logo-section img {
-            max-width: 120px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .welcome-text {
-            color: #ffffff;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            opacity: 0.9;
-        }
+         .logo-section {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+    background-color: rgba(255, 255, 255, 0.95); /* Added white background for contrast */
+    border-radius: 12px; /* Rounded corners for logo container */
+    margin: 1rem; /* Margin to separate from sidebar edges */
+}
+
+.logo-section img {
+    max-width: 120px; /* Increased size for visibility */
+    border-radius: 8px;
+    padding: 8px; /* Added padding for space around logo */
+    background-color: transparent; /* Preserve logo transparency */
+}
+
+.welcome-text {
+    color: #1e3a8a; /* Changed to dark color for contrast on white background */
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.85;
+}
         
         .nav-link {
             color: rgba(255,255,255,0.8) !important;
@@ -161,7 +165,7 @@
                 <div class="sidebar-content">
                     <div class="logo-section">
                         <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
-                        <div class="welcome-text">Welcome, User</div>
+                        <div class="welcome-text">Welcome, {{username}}</div>
                     </div>
                     
                     <ul class="nav flex-column">

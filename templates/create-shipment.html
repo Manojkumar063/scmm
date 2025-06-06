@@ -6,42 +6,32 @@
     <title>SCM Expert - Create Shipment</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
 
     <style>
         :root {
-            --primary-color: #1a365d;
-            --secondary-color: #2d4a67;
-            --accent-color: #3182ce;
-            --success-color: #38a169;
-            --warning-color: #d69e2e;
-            --danger-color: #e53e3e;
-            --light-bg: #f7fafc;
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
+            --background-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-primary: #2d3748;
-            --text-secondary: #4a5568;
-            --text-muted: #718096;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        * {
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+            min-height: 100vh;
             margin: 0;
+            color: #2d3748;
+        }
+
+        .container-fluid {
             padding: 0;
         }
 
-        /* Sidebar Styles */
         .sidebar {
             min-height: 100vh;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -49,318 +39,267 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .sidebar-content {
             flex: 1;
             padding: 1.5rem 0;
         }
-        
+
         .sidebar-footer {
             padding: 1rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: auto;
         }
-        
+
         .logo-section {
-            text-align: center;
-            padding: 2rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .logo-section img {
-            max-width: 120px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        
-        .welcome-text {
-            color: #ffffff;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            opacity: 0.9;
-        }
-        
+    text-align: center;
+    padding: 2rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+    background-color: rgba(255, 255, 255, 0.95); /* Added white background for contrast */
+    border-radius: 12px; /* Rounded corners for logo container */
+    margin: 1rem; /* Margin to separate from sidebar edges */
+}
+
+.logo-section img {
+    max-width: 120px; /* Increased size for visibility */
+    border-radius: 8px;
+    padding: 8px; /* Added padding for space around logo */
+    background-color: transparent; /* Preserve logo transparency */
+}
+
+.welcome-text {
+    color: #1e3a8a; /* Changed to dark color for contrast on white background */
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    opacity: 0.85;
+}
         .nav-link {
-            color: rgba(255,255,255,0.8) !important;
+            color: rgba(255,255,255,0.8);
             padding: 0.75rem 1.5rem;
             margin: 0.25rem 0.5rem;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
         }
-        
+
         .nav-link:hover {
             background-color: rgba(255,255,255,0.1);
-            color: #ffffff !important;
-            transform: translateX(5px);
+            color: #ffffff;
+            transform: translateX(3px);
         }
-        
+
         .nav-link.active {
             background-color: #ffffff;
-            color: #1e3c72 !important;
+            color: var(--primary-color);
             font-weight: 600;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .nav-link i {
             width: 20px;
             margin-right: 0.75rem;
         }
-        
+
         .logout-btn {
             background-color: rgba(220, 53, 69, 0.1);
             border: 1px solid rgba(220, 53, 69, 0.3);
-            color: #ff6b6b !important;
+            color: #ff6b6b;
         }
-        
+
         .logout-btn:hover {
-            background-color: #dc3545;
-            color: #ffffff !important;
+            background-color: var(--secondary-color);
+            color: #ffffff;
             transform: none;
         }
-        
-        /* Main Content */
-        main {
-            background-color: var(--light-bg);
-            min-height: 100vh;
+
+        .main-content {
             padding: 2rem;
         }
 
         .page-header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem 0;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-color);
         }
 
         .page-title {
             font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-weight: 600;
+            color: var(--primary-color);
             margin: 0;
         }
 
         .breadcrumb {
-            background: none;
-            padding: 0;
-            margin: 0.5rem 0 0 0;
-            font-size: 0.875rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
         }
 
         .breadcrumb-item a {
-            color: var(--text-muted);
+            color: #6b7280;
             text-decoration: none;
         }
 
         .breadcrumb-item.active {
-            color: var(--text-secondary);
+            color: #2d3748;
         }
 
-        /* Card Styles */
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
+            background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+            border: none;
         }
 
         .card:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .card-header {
-            background-color: transparent;
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem;
+            transform: translateY(-2px);
         }
 
         .card-body {
             padding: 2rem;
         }
 
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        /* Form Styles */
         .form-section {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .section-title {
-            font-size: 1.125rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border-color);
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
         }
 
         .section-title i {
-            margin-right: 0.75rem;
+            margin-right: 0.5rem;
             color: var(--accent-color);
         }
 
         .form-label {
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .form-control, .form-select {
-            border: 1px solid var(--border-color);
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            padding: 0.75rem 1rem;
+            padding: 0.75rem;
             font-size: 0.95rem;
-            line-height: 1.5;
-            transition: all 0.2s ease;
-            background-color: var(--card-bg);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
             outline: none;
         }
 
         .form-control.is-invalid {
-            border-color: var(--danger-color);
+            border-color: var(--secondary-color);
         }
 
         .form-control.is-invalid:focus {
-            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
         }
 
         .invalid-feedback {
-            color: var(--danger-color);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
         }
 
         .form-text {
-            color: var(--text-muted);
-            font-size: 0.8125rem;
+            font-size: 0.8rem;
+            color: #6b7280;
             margin-top: 0.25rem;
         }
 
-        /* Input Groups */
-        .input-group-text {
-            background-color: var(--light-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .input-group .form-control {
-            border-left: none;
-        }
-
-        .input-group:focus-within .input-group-text {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        /* Buttons */
         .btn {
             font-weight: 500;
             border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
             transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
         }
 
         .btn-primary {
-            background-color: var(--accent-color);
+            background: var(--accent-color);
+            border: none;
             color: white;
         }
 
         .btn-primary:hover {
-            background-color: #2c5aa0;
+            background: #2563eb;
             transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-secondary {
-            background-color: var(--text-muted);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #4a5568;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
         }
 
         .btn-outline-secondary {
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            background-color: transparent;
+            border: 1px solid #d1d5db;
+            color: #6b7280;
+            background: transparent;
         }
 
         .btn-outline-secondary:hover {
-            background-color: var(--light-bg);
-            border-color: var(--text-secondary);
-            color: var(--text-secondary);
+            background: #f1f5f9;
+            color: var(--primary-color);
         }
 
-        /* Toast Notifications */
         .toast {
             border-radius: 8px;
-            border: none;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .toast-header {
             font-weight: 600;
+            color: white;
         }
 
         .toast-header.bg-danger {
-            background-color: var(--danger-color) !important;
+            background-color: var(--secondary-color);
         }
 
         .toast-header.bg-success {
-            background-color: var(--success-color) !important;
+            background-color: var(--success-color);
         }
 
-        /* Loading Spinner */
         .spinner-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            display: none;
             align-items: center;
-            z-index: 1050;
+            justify-content: center;
+            z-index: 9999;
         }
 
         .spinner-content {
-            background-color: var(--card-bg);
-            padding: 2rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
             border-radius: 12px;
             text-align: center;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .spinner-border {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-width: 0.25em;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -370,42 +309,26 @@
                 z-index: 1000;
                 transition: left 0.3s ease;
             }
-            
+
             .sidebar.show {
                 left: 0;
             }
-            
+
             .main-content {
-                margin-left: 0;
                 padding: 1rem;
             }
 
             .page-header {
-                padding: 1rem 0;
+                padding: 1rem;
             }
 
             .card-body {
                 padding: 1.5rem;
             }
 
-            .btn {
-                width: 100%;
-                margin-bottom: 0.5rem;
+            .page-title {
+                font-size: 1.5rem;
             }
-
-            .d-md-flex .btn {
-                width: auto;
-                margin-bottom: 0;
-            }
-        }
-
-        /* Utility Classes */
-        .text-muted {
-            color: var(--text-muted) !important;
-        }
-
-        .border-bottom {
-            border-bottom: 1px solid var(--border-color) !important;
         }
     </style>
 </head>
@@ -417,54 +340,54 @@
                 <div class="sidebar-content">
                     <div class="logo-section">
                         <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
-                        <div class="welcome-text">Welcome, User</div>
+                        <div class="welcome-text">Welcome, {{ username }}</div>
                     </div>
-                    
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">
-                                <i class="bi bi-speedometer2"></i>Dashboard
+                                <i class="bi bi-speedometer2"></i> Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/shipments">
-                                <i class="bi bi-box-seam"></i>Shipments
+                                <i class="bi bi-box-seam"></i> Shipments
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/device-data">
-                                <i class="bi bi-graph-up"></i>Device Data
+                                <i class="bi bi-graph-up"></i> Device Data
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="/new_shipment">
-                                <i class="bi bi-truck"></i>New Shipment
+                                <i class="bi bi-truck"></i> New Shipment
                             </a>
                         </li>
+                        {% if role == 'admin' %}
                         <li class="nav-item">
                             <a class="nav-link" href="/users">
-                                <i class="bi bi-people"></i>Users
+                                <i class="bi bi-people"></i> Users
                             </a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="/my_account">
-                                <i class="bi bi-person-circle"></i>My Account
+                                <i class="bi bi-person-circle"></i> My Account
                             </a>
                         </li>
                     </ul>
                 </div>
-                
                 <div class="sidebar-footer">
                     <a class="nav-link logout-btn" href="/logout">
-                        <i class="bi bi-box-arrow-right"></i>Logout
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </div>
             </nav>
 
             <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+            <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
                 <div class="page-header">
-                    <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h1 class="page-title">Create New Shipment</h1>
                             <nav aria-label="breadcrumb">
@@ -476,7 +399,7 @@
                             </nav>
                         </div>
                         <a href="/shipments" class="btn btn-outline-secondary">
-                            <i class="bi bi-arrow-left me-2"></i>Back to List
+                            <i class="bi bi-arrow-left me-2"></i> Back to List
                         </a>
                     </div>
                 </div>
@@ -484,16 +407,16 @@
                 <div class="card">
                     <div class="card-body">
                         <form id="shipmentForm" onsubmit="return handleShipmentCreate(event)" class="needs-validation" novalidate action="/new_shipment" method="post">
-
                             <!-- Shipment Details Section -->
                             <div class="form-section">
                                 <h3 class="section-title">
-                                    <i class="bi bi-box-seam"></i>
-                                    Shipment Details
+                                    <i class="bi bi-box-seam"></i> Shipment Details
                                 </h3>
-                                <div class="row g-4">
+                                <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="shipmentNumber" class="form-label">Shipment Number</label>
+                                        <label for="shipmentNumber" class="form-label">
+                                            <i class="bi bi-tag"></i> Shipment Number
+                                        </label>
                                         <input type="text" class="form-control" id="shipmentNumber" name="shipmentNumber"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter shipment number">
                                         <div class="form-text">Unique identifier for this shipment</div>
@@ -501,7 +424,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="containerNumber" class="form-label">Container Number</label>
+                                        <label for="containerNumber" class="form-label">
+                                            <i class="bi bi-box"></i> Container Number
+                                        </label>
                                         <input type="text" class="form-control" id="containerNumber" name="containerNumber"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter container number">
                                         <div class="form-text">Physical container identification</div>
@@ -509,21 +434,27 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="goodsType" class="form-label">Goods Type</label>
+                                        <label for="goodsType" class="form-label">
+                                            <i class="bi bi-boxes"></i> Goods Type
+                                        </label>
                                         <input type="text" class="form-control" id="goodsType" name="goodsType"
                                                required minlength="2" maxlength="100" placeholder="Enter goods type">
                                         <div class="invalid-feedback">Please enter a valid goods type (2-100 characters)</div>
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="expectedDeliveryDate" class="form-label">Expected Delivery</label>
+                                        <label for="expectedDeliveryDate" class="form-label">
+                                            <i class="bi bi-calendar"></i> Expected Delivery
+                                        </label>
                                         <input type="datetime-local" class="form-control" id="expectedDeliveryDate" name="expectedDeliveryDate"
                                                required>
                                         <div class="invalid-feedback">Please select a valid delivery date</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="routeDetails" class="form-label">Route Information</label>
+                                        <label for="routeDetails" class="form-label">
+                                            <i class="bi bi-map"></i> Route Information
+                                        </label>
                                         <textarea class="form-control" id="routeDetails" name="routeDetails"
                                                   required minlength="5" maxlength="200" rows="3"
                                                   placeholder="Enter detailed route information including origin, destination, and key waypoints"></textarea>
@@ -536,12 +467,13 @@
                             <!-- Tracking & Identification Section -->
                             <div class="form-section">
                                 <h3 class="section-title">
-                                    <i class="bi bi-qr-code-scan"></i>
-                                    Tracking & Identification
+                                    <i class="bi bi-qr-code-scan"></i> Tracking & Identification
                                 </h3>
-                                <div class="row g-4">
+                                <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="deviceId" class="form-label">Device ID</label>
+                                        <label for="deviceId" class="form-label">
+                                            <i class="bi bi-hdd"></i> Device ID
+                                        </label>
                                         <input type="text" class="form-control" id="deviceId" name="deviceId"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter device ID">
                                         <div class="form-text">IoT tracking device identifier</div>
@@ -549,7 +481,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="poNumber" class="form-label">Purchase Order</label>
+                                        <label for="poNumber" class="form-label">
+                                            <i class="bi bi-file-text"></i> Purchase Order
+                                        </label>
                                         <input type="text" class="form-control" id="poNumber" name="poNumber"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter PO number">
                                         <div class="form-text">Related purchase order number</div>
@@ -557,7 +491,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="ndcNumber" class="form-label">NDC Number</label>
+                                        <label for="ndcNumber" class="form-label">
+                                            <i class="bi bi-upc"></i> NDC Number
+                                        </label>
                                         <input type="text" class="form-control" id="ndcNumber" name="ndcNumber"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter NDC number">
                                         <div class="form-text">National Drug Code identification</div>
@@ -565,7 +501,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="serialNumberOfGoods" class="form-label">Serial Number</label>
+                                        <label for="serialNumberOfGoods" class="form-label">
+                                            <i class="bi bi-barcode"></i> Serial Number
+                                        </label>
                                         <input type="text" class="form-control" id="serialNumberOfGoods" name="serialNumberOfGoods"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter serial number">
                                         <div class="form-text">Goods serial number</div>
@@ -577,12 +515,13 @@
                             <!-- Delivery & Batch Information Section -->
                             <div class="form-section">
                                 <h3 class="section-title">
-                                    <i class="bi bi-truck"></i>
-                                    Delivery & Batch Information
+                                    <i class="bi bi-truck"></i> Delivery & Batch Information
                                 </h3>
-                                <div class="row g-4">
+                                <div class="row g-3">
                                     <div class="col-md-6">
-                                        <label for="deliveryNumber" class="form-label">Delivery Number</label>
+                                        <label for="deliveryNumber" class="form-label">
+                                            <i class="bi bi-truck-flatbed"></i> Delivery Number
+                                        </label>
                                         <input type="text" class="form-control" id="deliveryNumber" name="deliveryNumber"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter delivery number">
                                         <div class="form-text">Delivery reference number</div>
@@ -590,7 +529,9 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="batchId" class="form-label">Batch ID</label>
+                                        <label for="batchId" class="form-label">
+                                            <i class="bi bi-collection"></i> Batch ID
+                                        </label>
                                         <input type="text" class="form-control" id="batchId" name="batchId"
                                                required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter batch ID">
                                         <div class="form-text">Production batch identifier</div>
@@ -598,7 +539,9 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="shipmentDescription" class="form-label">Additional Notes</label>
+                                        <label for="shipmentDescription" class="form-label">
+                                            <i class="bi bi-chat-left-text"></i> Additional Notes
+                                        </label>
                                         <textarea class="form-control" id="shipmentDescription" name="shipmentDescription"
                                                   maxlength="500" rows="4" placeholder="Enter any additional information about this shipment (optional)"></textarea>
                                         <div class="form-text">Optional additional details or special instructions</div>
@@ -609,11 +552,11 @@
 
                             <!-- Form Actions -->
                             <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
-                                <a href="/shipments" class="btn btn-secondary">
-                                    <i class="bi bi-x-lg me-2"></i>Cancel
+                                <a href="/shipments" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-lg me-2"></i> Cancel
                                 </a>
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-check-lg me-2"></i>Create Shipment
+                                    <i class="bi bi-check-lg me-2"></i> Create Shipment
                                 </button>
                             </div>
                         </form>
@@ -633,7 +576,6 @@
             </div>
             <div class="toast-body" id="errorMessage"></div>
         </div>
-        
         <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-success text-white">
                 <i class="bi bi-check-circle-fill me-2"></i>
@@ -645,7 +587,7 @@
     </div>
 
     <!-- Loading Overlay -->
-    <div class="spinner-container" style="display: none;">
+    <div class="spinner-container" id="spinner">
         <div class="spinner-content">
             <div class="spinner-border text-primary mb-3" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -654,81 +596,59 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Helper function to show error messages
         function showErrorMessage(message) {
             const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
             document.getElementById('errorMessage').textContent = message;
             errorToast.show();
         }
 
-        // Helper function to show success messages
         function showSuccessMessage(message) {
             const successToast = new bootstrap.Toast(document.getElementById('successToast'));
             document.getElementById('successMessage').textContent = message;
             successToast.show();
         }
 
-        // Professional form handling
         async function handleShipmentCreate(event) {
             event.preventDefault();
-            
             const form = event.target;
             if (!form.checkValidity()) {
                 form.classList.add('was-validated');
+                showErrorMessage('Please correct the errors in the form and try again.');
                 return false;
             }
-            
-            // Show loading
-            document.querySelector('.spinner-container').style.display = 'flex';
-            
+
+            document.getElementById('spinner').style.display = 'flex';
             try {
                 const formData = new FormData(form);
                 const response = await fetch('/new_shipment', {
                     method: 'POST',
                     body: formData
                 });
-                
-                if (!response.ok) {
-                    throw new Error('Failed to create shipment');
-                }
-                
                 const data = await response.json();
-                
-                // Show success message
-                const successToast = new bootstrap.Toast(document.getElementById('successToast'));
-                document.getElementById('successMessage').textContent = 'Shipment created successfully!';
-                successToast.show();
-                
-                // Redirect after success
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Failed to create shipment');
+                }
+
+                showSuccessMessage('Shipment created successfully!');
                 setTimeout(() => window.location.href = '/shipments', 2000);
-                
             } catch (error) {
-                const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
-                document.getElementById('errorMessage').textContent = error.message;
-                errorToast.show();
+                showErrorMessage(error.message);
             } finally {
-                document.querySelector('.spinner-container').style.display = 'none';
+                document.getElementById('spinner').style.display = 'none';
             }
-            
             return false;
         }
 
-        // Form validation enhancement
         document.addEventListener('DOMContentLoaded', function() {
             const forms = document.querySelectorAll('.needs-validation');
-            
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
                     if (!form.checkValidity()) {
                         event.preventDefault();
                         event.stopPropagation();
-                        
-                        showErrorMessage('Please correct the errors in the form and try again.');
                     }
-                    
                     form.classList.add('was-validated');
                 }, false);
             });

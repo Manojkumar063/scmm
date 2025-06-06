@@ -6,99 +6,276 @@
     <title>SCM - Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="/static/css/styles.css" rel="stylesheet">
     <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
+            --background-color: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 480px;
+            padding: 1.5rem;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        .input-group .btn-outline-secondary {
+            border: 1px solid #d1d5db;
+            border-radius: 0 8px 8px 0;
+            background: #fff;
+            color: #6b7280;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .input-group .btn-outline-secondary:hover {
+            background: #f1f5f9;
+            color: var(--accent-color);
+        }
+
+        .invalid-feedback {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            width: 100%;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 1.25rem;
+        }
+
+        .register-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .register-link a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .alert {
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .card-header {
+                padding: 1rem;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .logo-container img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
     <div class="container">
-        <div class="row justify-content-center align-items-center min-vh-100">
-            <div class="col-md-6 col-lg-4">
-                <div class="card shadow-lg">
-                    <div class="card-body p-5">
-                        <div class="text-center mb-4">
-                            <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" 
-                                 alt="Exafluence Logo" 
-                                 style="width: 60px; height: 60px; margin-bottom: 20px;">
-                        </div>
-                        <h2 class="text-center mb-4">Supply Chain Management</h2>
-
-                        <!-- Display error message at the top if exists -->
-                        {% if message %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        {% endif %}
-
-                        <!-- Login Form -->
-                        <form action="/login" method="post" novalidate>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" 
-                                       class="form-control {% if message and email %}is-invalid{% endif %}" 
-                                       id="email" 
-                                       name="email" 
-                                       value="{{ email if email else '' }}"
-                                       required
-                                       autocomplete="email">
-                                <div class="invalid-feedback">
-                                    Please enter a valid email address.
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <input type="password" 
-                                           class="form-control {% if message %}is-invalid{% endif %}" 
-                                           id="password" 
-                                           name="password" 
-                                           required
-                                           autocomplete="current-password">
-                                    <button class="btn btn-outline-secondary" 
-                                            type="button" 
-                                            id="togglePassword"
-                                            tabindex="-1">
-                                        <i class="bi bi-eye" id="toggleIcon"></i>
-                                    </button>
-                                </div>
-                                <div class="invalid-feedback">
-                                    Password is required.
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-box-arrow-in-right me-2"></i>Login
-                                </button>
-                            </div>
-                            
-                            <div class="text-center mt-3">
-                                <a href="/register" class="text-decoration-none">
-                                    <i class="bi bi-person-plus me-1"></i>Create new account
-                                </a>
-                            </div>
-                        </form>
-                    </div>
+        <div class="login-card">
+            <div class="card-header">
+                <div class="logo-container">
+                    <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo">
                 </div>
+                <h1 class="page-title">Supply Chain Management</h1>
+            </div>
+            <div class="card-body">
+                {% if message %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+                <form action="/login" method="post" novalidate>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            <i class="bi bi-envelope"></i> Email
+                        </label>
+                        <input type="email" 
+                               class="form-control {% if message and email %}is-invalid{% endif %}" 
+                               id="email" 
+                               name="email" 
+                               value="{{ email if email else '' }}"
+                               required
+                               autocomplete="email">
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <div class="input-group">
+                            <input type="password" 
+                                   class="form-control {% if message %}is-invalid{% endif %}" 
+                                   id="password" 
+                                   name="password" 
+                                   required
+                                   autocomplete="current-password">
+                            <button class="btn btn-outline-secondary" 
+                                    type="button" 
+                                    id="togglePassword"
+                                    tabindex="-1">
+                                <i class="bi bi-eye" id="toggleIcon"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback">
+                            Password is required.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Login
+                        </button>
+                    </div>
+
+                    <div class="register-link">
+                        <a href="/register">
+                            <i class="bi bi-person-plus me-1"></i> Create new account
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
-        // Toggle password visibility
         document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordField = document.getElementById('password');
             const toggleIcon = document.getElementById('toggleIcon');
-            
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
                 toggleIcon.className = 'bi bi-eye-slash';
@@ -108,7 +285,6 @@
             }
         });
 
-        // Auto-dismiss alerts after 1 seconds
         document.addEventListener('DOMContentLoaded', function() {
             const alerts = document.querySelectorAll('.alert');
             alerts.forEach(function(alert) {
@@ -119,11 +295,9 @@
             });
         });
 
-        // Focus on email field if empty, otherwise focus on password
         document.addEventListener('DOMContentLoaded', function() {
             const emailField = document.getElementById('email');
             const passwordField = document.getElementById('password');
-            
             if (!emailField.value.trim()) {
                 emailField.focus();
             } else {
@@ -131,8 +305,5 @@
             }
         });
     </script>
-    
-    <script src="/static/js/login.js"></script>
-    <script src="/static/js/security.js"></script>
 </body>
 </html>
