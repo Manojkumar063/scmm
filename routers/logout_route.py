@@ -9,7 +9,7 @@ templates = Jinja2Templates(directory='templates')
 def logout(request: Request):
     """Handle user logout by clearing access token cookie and rendering login page."""
     response = templates.TemplateResponse(
-        'login.html',
+        'landingpage.html',
         context={
             'request': request,
             'message': 'You have been logged out successfully.'

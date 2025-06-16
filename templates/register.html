@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCM Expert - Create Account</title>
+    <title>SCMXPertLite - Create Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
@@ -22,23 +22,39 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             min-height: 100vh;
             margin: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 0;
         }
 
         .container {
             max-width: 480px;
             padding: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .register-card {
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             transition: transform 0.2s ease;
         }
@@ -107,6 +123,29 @@
             font-size: 0.8rem;
             color: #6b7280;
             margin-top: 0.25rem;
+        }
+
+        .input-group .btn-outline-secondary {
+            border: 1px solid #d1d5db;
+            border-radius: 0 8px 8px 0;
+            background: #fff;
+            color: #6b7280;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .input-group .btn-outline-secondary:hover {
+            background: #f1f5f9;
+            color: var(--accent-color);
+        }
+
+        .invalid-feedback {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+            color: #6b7280;
         }
 
         .btn-register {
@@ -221,7 +260,7 @@
                     <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo">
                 </div>
                 <h1 class="page-title">Create Account</h1>
-                <p class="page-subtitle">Join SCM Expert Platform</p>
+                <p class="page-subtitle">Join SCMXPertLite Platform</p>
             </div>
             <div class="card-body">
                 {% if message %}
@@ -288,16 +327,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="role" class="form-label">
-                            <i class="bi bi-shield-check"></i> Role
-                        </label>
-                        <select class="form-select" id="role" name="role" required>
-                            <option value="">Select your role...</option>
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
+                    <input type="hidden" id="role" name="role" value="user">
 
                     <div class="d-grid">
                         <button type="submit" class="btn btn-register">
@@ -338,4 +368,106 @@
 
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
-            const strengthFill = document.getElementBy卓管理
+            const strengthFill = document.getElementById('strengthFill');
+            
+            // Reset strength meter
+            strengthFill.className = 'strength-fill';
+            
+            if (password.length === 0) {
+                return;
+            }
+            
+            // Calculate password strength
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            if (password.length >= 12) strength += 1;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+            
+            // Update strength meter
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-fair');
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-good');
+            } else {
+                strengthFill.classList.add('strength-strong');
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            const matchIcon = document.getElementById('passwordMatch');
+            const mismatchIcon = document.getElementById('passwordMismatch');
+            
+            if (confirmPassword.length === 0) {
+                matchIcon.style.display = 'none';
+                mismatchIcon.style.display = 'none';
+                return;
+            }
+            
+            if (password === confirmPassword) {
+                matchIcon.style.display = 'inline-block';
+                mismatchIcon.style.display = 'none';
+            } else {
+                matchIcon.style.display = 'none';
+                mismatchIcon.style.display = 'inline-block';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // Reset error message
+            errorMessage.classList.add('d-none');
+            
+            // Password validation
+            if (password.length < 8) {
+                e.preventDefault();
+                errorText.textContent = 'Password must be at least 8 characters long.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[0-9]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one number.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[A-Za-z]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one letter.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[^A-Za-z0-9]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one special character.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            // Password match validation
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                errorText.textContent = 'Passwords do not match.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

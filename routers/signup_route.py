@@ -1,3 +1,6 @@
+# __________________________
+# Imports
+# __________________________
 from fastapi import APIRouter, Request, Form, HTTPException, status
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
@@ -9,10 +12,21 @@ from typing import Optional
 from database import users_data
 from models import Users
 
+
+# __________________________
+# Setup
+# __________________________
+
+
 logger = logging.getLogger(__name__)
 router = APIRouter()
 templates = Jinja2Templates(directory='templates')
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+# __________________________
+# Utility Functions
+# __________________________
 
 def validate_password(password: str) -> Optional[str]:
     """Validate password strength and return error message if invalid."""
@@ -31,12 +45,15 @@ def validate_email(email: str) -> bool:
     email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     return re.match(email_pattern, email) is not None
 
-@router.get("/register")
+# __________________________
+# Routes
+# __________________________
+@router.get("/")
 async def show_register(request: Request):
     """Display registration page."""
-    return templates.TemplateResponse("register.html", {"request": request})
+    return templates.TemplateResponse("landingpage.html", {"request": request})
 
-@router.get('/')
+@router.get('/register')
 def register(request: Request):
     """Display registration page (root route)."""
     return templates.TemplateResponse("register.html", {"request": request})
@@ -160,26 +177,26 @@ async def register_user(
             "message": "Something went wrong. Please try again."
         })
 
-def debug_database_connection():
-    """Test database connection and operations."""
-    try:
-        if users_data is None:
-            logger.error("users_data is None - database connection failed")
-            return False
+# def debug_database_connection():
+#     """Test database connection and operations."""
+#     try:
+#         if users_data is None:
+#             logger.error("users_data is None - database connection failed")
+#             return False
             
-        # Test connection
-        db_stats = users_data.database.command("dbstats")
-        logger.info(f"Database stats: {db_stats}")
+#         # Test connection
+#         db_stats = users_data.database.command("dbstats")
+#         logger.info(f"Database stats: {db_stats}")
         
-        # Test collection access
-        collection_stats = users_data.database.command("collStats", users_data.name)
-        logger.info(f"Collection stats: {collection_stats}")
+#         # Test collection access
+#         collection_stats = users_data.database.command("collStats", users_data.name)
+#         logger.info(f"Collection stats: {collection_stats}")
         
-        # Count documents
-        count = users_data.count_documents({})
-        logger.info(f"Current user count: {count}")
+#         # Count documents
+#         count = users_data.count_documents({})
+#         logger.info(f"Current user count: {count}")
         
-        return True
-    except Exception as e:
-        logger.error(f"Database connection test failed: {str(e)}")
-        return False
+#         return True
+#     except Exception as e:
+#         logger.error(f"Database connection test failed: {str(e)}")
+#         return False

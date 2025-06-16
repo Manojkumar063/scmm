@@ -1,7 +1,11 @@
 from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime
-from typing import Optional, Literal
+from typing import Optional
 
+
+# ────────────────────────────────────────────────────────────────────────────────
+# User Model
+# ────────────────────────────────────────────────────────────────────────────────
 
 class Users(BaseModel):
     """User model with validation."""
@@ -18,6 +22,10 @@ class Users(BaseModel):
             datetime: lambda v: v.isoformat()
         }
 
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Shipment Model
+# ────────────────────────────────────────────────────────────────────────────────
 
 class Shipment(BaseModel):
     shipment_number: str = Field(..., min_length=1, max_length=50)
@@ -36,12 +44,15 @@ class Shipment(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     status: str = Field(default="pending")
 
-
     class Config:
         json_encoders = {
             datetime: lambda v: v.isoformat()
         }
 
+
+# ────────────────────────────────────────────────────────────────────────────────
+# Device Data Model
+# ────────────────────────────────────────────────────────────────────────────────
 
 class DeviceData(BaseModel):
     """Device data model with validation."""
@@ -59,5 +70,8 @@ class DeviceData(BaseModel):
         }
 
 
-# Keep the old model name for backward compatibility
+# ────────────────────────────────────────────────────────────────────────────────
+# Alias for Backward Compatibility
+# ────────────────────────────────────────────────────────────────────────────────
+
 Devicedata = DeviceData
