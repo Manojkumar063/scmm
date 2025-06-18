@@ -13,8 +13,8 @@ SCMM/
 │
 ├── kafka_module/                # Kafka Integration
 │   ├── consumer.py       # Kafka consumer implementation
-│   ├── kafka_config.py   # Kafka configuration settings
-│   ├── kafka_routes.py   # Kafka-related API routes
+│   ├── server.py         # server
+│   ├── docker-compose.yml  #docker yml file
 │   └── producer.py       # Kafka producer implementation
 │
 ├── routers/              # API Routes
