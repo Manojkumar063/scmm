@@ -1,17 +1,57 @@
+# ────────────────────────────────────────────────────────────────────────────────
+# Imports
+# ────────────────────────────────────────────────────────────────────────────────
 import socket
 import json
 import time
 import random
 
+# ────────────────────────────────────────────────────────────────────────────────
+# Configuration
+# ────────────────────────────────────────────────────────────────────────────────
 PORT = 5050
 SERVER = '192.168.60.35'
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
-# Routes for simulation
-ROUTES = ['Newyork,USA', 'Chennai,India', 'Bengaluru,India', 'London,UK']
-
+# Predefined simulation routes
+ROUTES = [
+    'New York, USA',
+    'Chennai, India',
+    'Bengaluru, India',
+    'London, UK',
+    'Frankfurt, Germany',
+    'Berlin, Germany',
+    'Paris, France',
+    'Tokyo, Japan',
+    'Seoul, South Korea',
+    'Beijing, China',
+    'Shanghai, China',
+    'Hong Kong, China',
+    'Singapore',
+    'Dubai, UAE',
+    'Sydney, Australia',
+    'Melbourne, Australia',
+    'Auckland, New Zealand',
+    'Los Angeles, USA',
+    'San Francisco, USA',
+    'Miami, USA',
+    'Toronto, Canada',
+    'Vancouver, Canada',
+    'Montreal, Canada',
+    'Mexico City, Mexico',
+    'São Paulo, Brazil',
+    'Buenos Aires, Argentina',
+    'Lima, Peru',
+    'Bogotá, Colombia',
+    'Caracas, Venezuela',
+    'Santiago, Chile',
+    'Quito, Ecuador'
+]
+# ────────────────────────────────────────────────────────────────────────────────
+# Data Generator
+# ────────────────────────────────────────────────────────────────────────────────
 def generate_device_data():
     while True:
         route_from, route_to = random.sample(ROUTES, 2)
@@ -24,7 +64,9 @@ def generate_device_data():
         }
         yield json.dumps(data).encode(FORMAT) + b'\n'  # newline for message boundary
 
-
+# ────────────────────────────────────────────────────────────────────────────────
+# Start TCP Server
+# ────────────────────────────────────────────────────────────────────────────────
 def start_server():
     try:
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -40,7 +82,7 @@ def start_server():
         print(f"[CONNECTED] Client connected from {addr}")
         data_generator = generate_device_data()
 
-        for _ in range(15):  # Send only 5 messages
+        for _ in range(15):  # Send only 15 messages
             message = next(data_generator)
             conn.sendall(message)
             print("[SENT]:", message.decode(FORMAT).strip())
@@ -48,12 +90,14 @@ def start_server():
 
     except Exception as e:
         print(f"[ERROR] During communication: {e}")
+
     finally:
         conn.close()
         server.close()
         print("[CLOSED] Server connections closed")
 
+# ────────────────────────────────────────────────────────────────────────────────
+# Entry Point
+# ────────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     start_server()
-
-

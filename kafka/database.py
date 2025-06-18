@@ -11,6 +11,8 @@ db = client['supply_chain_db']
 users_data = db['users']
 shipment_data = db['shipments']
 device_data = db['devices']
+
+
 # from pymongo import MongoClient
 # from dotenv import load_dotenv
 # import os

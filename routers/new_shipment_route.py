@@ -1,26 +1,38 @@
+# ____________________________________
+# Imports and Module Initialization
+# ____________________________________
+
 from fastapi import Request, Form, Depends, APIRouter, HTTPException, status
 from fastapi.templating import Jinja2Templates
-from database import users_data, shipment_data
+from typing import Dict, Optional
 from datetime import datetime
 import logging
-from typing import Dict,Optional
 
-
+from database import users_data, shipment_data
 from .jwt_handler import get_current_user
 from .cookie_handler import delete_access_token_cookie
 from models import Shipment
 
+# Initialize logging and routing
 logger = logging.getLogger(__name__)
 router = APIRouter()
 templates = Jinja2Templates(directory='templates')
 
+
+# ____________________________________
+# GET Endpoint: Render Create Shipment Form
+# ____________________________________
+
 @router.get('/new_shipment')
-def create_shipment_get(request: Request, current_user: Dict[str, str] = Depends(get_current_user)):
+def create_shipment_get(
+    request: Request,
+    current_user: Dict[str, str] = Depends(get_current_user)
+):
     """Display new shipment creation form."""
     try:
         user_email = current_user['email']
         user = users_data.find_one({'email': user_email})
-        
+
         if not user:
             logger.warning(f"User not found: {user_email}")
             raise HTTPException(
@@ -45,7 +57,9 @@ def create_shipment_get(request: Request, current_user: Dict[str, str] = Depends
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"New shipment GET error for user {current_user.get('email', 'unknown')}: {str(e)}")
+        logger.error(
+            f"New shipment GET error for user {current_user.get('email', 'unknown')}: {str(e)}"
+        )
         response = templates.TemplateResponse(
             'login.html',
             {'request': request, 'message': "An error occurred. Please login again."}
@@ -54,7 +68,10 @@ def create_shipment_get(request: Request, current_user: Dict[str, str] = Depends
         return response
 
 
-# Modify the create_shipment_post function to return JSON:
+# ____________________________________
+# POST Endpoint: Handle New Shipment Submission
+# ____________________________________
+
 @router.post('/new_shipment')
 async def create_shipment_post(
     request: Request,
@@ -74,21 +91,22 @@ async def create_shipment_post(
 ):
     """Create new shipment with validation."""
     try:
-        # print(f"Creating shipment with data: {shipmentNumber}, {routeDetails}, {deviceId}, {poNumber}, {ndcNumber}, {serialNumberOfGoods}, {containerNumber}, {goodsType}, {expectedDeliveryDate}, {deliveryNumber}, {batchId}, {shipmentDescription}")
         user_email = current_user['email']
         user = users_data.find_one({'email': user_email})
-        # print(f"Current user: {user_email}")
+
         if not user:
             logger.warning(f"User not found: {user_email}")
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="User not found"
             )
-        # print(f"User found: {user}")
+
         role = user.get("role", "user")
         username = user.get("username", "Unknown User")
-        # print(f"User role: {role}, username: {username}")
-        # Check for duplicate shipment number
+
+        # ____________________________________
+        # Duplicate Check: Shipment Number
+        # ____________________________________
         if shipment_data.find_one({"shipment_number": shipmentNumber}):
             return templates.TemplateResponse(
                 'create-shipment.html',
@@ -99,8 +117,10 @@ async def create_shipment_post(
                     'username': username
                 }
             )
-        # print(f"Shipment number '{shipmentNumber}' is unique.")
-        # Check for duplicate delivery number
+
+        # ____________________________________
+        # Duplicate Check: Delivery Number
+        # ____________________________________
         if shipment_data.find_one({"delivery_number": deliveryNumber}):
             return templates.TemplateResponse(
                 'create-shipment.html',
@@ -111,8 +131,10 @@ async def create_shipment_post(
                     'username': username
                 }
             )
-        # print(f"Delivery number '{deliveryNumber}' is unique.")
-        # Create shipment document
+
+        # ____________________________________
+        # Create Shipment Document
+        # ____________________________________
         shipment_doc = Shipment(
             shipment_number=shipmentNumber,
             route=routeDetails.strip(),
@@ -129,8 +151,10 @@ async def create_shipment_post(
             user_id=user_email,
             created_at=datetime.now()
         )
-        # print(f"Shipment document created: {shipment_doc}")
-        # Insert shipment
+
+        # ____________________________________
+        # Insert into Database
+        # ____________________________________
         result = shipment_data.insert_one(shipment_doc.dict())
 
         if not result.inserted_id:
@@ -140,7 +164,10 @@ async def create_shipment_post(
             )
 
         logger.info(f"Shipment created successfully by {user_email}: {shipmentNumber}")
-        return {"message": "Shipment created successfully", "shipment_id": str(result.inserted_id)}
+        return {
+            "message": "Shipment created successfully",
+            "shipment_id": str(result.inserted_id)
+        }
 
     except HTTPException:
         raise

@@ -56,7 +56,7 @@ def account(request: Request, current_user: Dict[str, str] = Depends(get_current
             "account.html",
             {
                 "request": request,
-                "username": user.get("username", "Unknown User"),
+                "username": user.get("username"),
                 "email": user.get("email", ""),
                 "role": user.get("role", "user"),
                 "join_date": created_at_str
