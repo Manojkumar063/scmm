@@ -1,3 +1,10 @@
+"""
+Simple TCP Server to simulate device telemetry data.
+
+- Sends 15 JSON messages with random values
+- Each message includes Battery Level, Device ID, Temperature, Route From/To
+- Useful for testing client-side systems that receive sensor data
+"""
 # ────────────────────────────────────────────────────────────────────────────────
 # Imports
 # ────────────────────────────────────────────────────────────────────────────────
@@ -55,14 +62,20 @@ ROUTES = [
 def generate_device_data():
     while True:
         route_from, route_to = random.sample(ROUTES, 2)
+        
+        device_number = random.randint(100000, 100020)  # 6-digit number
+        device_id = f"IOT-DEV-{device_number}"  # Custom format
+
         data = {
             "Battery_Level": round(random.uniform(2.00, 5.00), 2),
-            "Device_ID": random.randint(1150, 1158),
+            "Device_ID": device_id,
             "First_Sensor_temperature": round(random.uniform(10, 40.0), 1),
             "Route_From": route_from,
             "Route_To": route_to
         }
-        yield json.dumps(data).encode(FORMAT) + b'\n'  # newline for message boundary
+
+        # Encode data to bytes, add newline for TCP separation
+        yield json.dumps(data).encode(FORMAT) + b'\n'
 
 # ────────────────────────────────────────────────────────────────────────────────
 # Start TCP Server
