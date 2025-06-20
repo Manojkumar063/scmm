@@ -14,12 +14,13 @@
 
     <!-- Inline Custom Styles -->
     <style>
+        /* === Base Styles === */
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Sidebar Styles */
+        /* === Sidebar === */
         .sidebar {
             min-height: 100vh;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -100,7 +101,7 @@
             color: #ffffff !important;
         }
 
-        /* Main Content */
+        /* === Main Content === */
         .main-content {
             padding: 2rem;
         }
@@ -136,7 +137,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        /* Account Card */
+        /* === Account Card === */
         .account-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border: none;
@@ -177,7 +178,7 @@
             color: #1e3c72;
         }
 
-        /* Responsive Styles */
+        /* === Responsive === */
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -210,19 +211,21 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
+            
+            <!-- === Sidebar === -->
             <nav class="col-md-3 col-lg-2 d-md-block sidebar">
                 <div class="sidebar-content">
-                    <!-- Logo and Welcome -->
+                    <!-- Logo + Welcome -->
                     <div class="logo-section">
                         <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
                         <div class="welcome-text">Welcome, {{ username }}</div>
                     </div>
 
-                    <!-- Navigation Menu -->
+                    <!-- Navigation Links -->
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2"></i>Dashboard</a>
@@ -255,14 +258,14 @@
                 </div>
             </nav>
 
-            <!-- Main Content -->
+            <!-- === Main Content === -->
             <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
-                <!-- Page Header -->
+                <!-- Header -->
                 <div class="page-header d-flex justify-content-between align-items-center">
                     <h1 class="page-title">Account Profile</h1>
                 </div>
 
-                <!-- Account Info -->
+                <!-- Account Info Card -->
                 <div class="account-card">
                     <div class="info-box">
                         <div class="info-item">
@@ -291,7 +294,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap Scripts -->
+    <!-- === Scripts === -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/security.js"></script>
 </body>
