@@ -40,7 +40,8 @@ def devicedata(request: Request, current_user: Dict[str, str] = Depends(get_curr
             return templates.TemplateResponse('error-404.html', {'request': request})
 
         devices = list(device_data.find())
-        logger.info(f"Fetched devices: {devices}")
+        # logger.info(f"Fetched devices: {devices}")
+
         logger.info(f"Rendering device data page for user: {username}, role: {role}")
 
         return templates.TemplateResponse(
