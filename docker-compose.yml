@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  scm_project:
+    build: .
+    container_name: scmm_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - kafka
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    environment:
+      - KAFKA_CFG_NODE_ID=1
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka_data:/bitnami/kafka
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics.sh --bootstrap-server localhost:9092 --list"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  server:
+    build:
+      context: ./backend/kafka/server
+      dockerfile: Dockerfile
+    container_name: kafka_server
+    ports:
+      - "8001:8000"
+    depends_on:
+      - kafka
+    restart: unless-stopped
+
+  producer:
+    build:
+      context: ./backend/kafka/producer
+      dockerfile: Dockerfile
+    container_name: kafka_producer
+    depends_on:
+      kafka:
+        condition: service_healthy
+      server:
+        condition: service_started
+    environment:
+      - KAFKA_BROKER=kafka:9092
+      - SERVER_HOST=kafka_server
+      - SERVER_PORT=8000
+    restart: unless-stopped
+
+  consumer:
+    build:
+      context: .
+      dockerfile: backend/kafka/consumer/Dockerfile
+    container_name: kafka_consumer
+    depends_on:
+      kafka:
+        condition: service_healthy
+      server:
+        condition: service_started
+      producer:
+        condition: service_started
+    environment:
+      - KAFKA_BROKER=kafka:9092
+    env_file:
+      - .env
+    restart: unless-stopped
+
+volumes:
+  kafka_data:
+    driver: local

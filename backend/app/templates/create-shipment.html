@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCMXPertLite - Create Shipment</title>
+    
+    <!-- External CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- <link href="/static/css/styles.css" rel="stylesheet"> -->
+    <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+
+    <style>
+        /* ================================================
+           CSS CUSTOM PROPERTIES (VARIABLES)
+        ================================================ */
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
+            --background-color: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        /* ================================================
+           GLOBAL STYLES
+        ================================================ */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
+            min-height: 100vh;
+            margin: 0;
+            color: #2d3748;
+        }
+
+        .container-fluid {
+            padding: 0;
+        }
+
+        /* ================================================
+           SIDEBAR STYLES
+        ================================================ */
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            padding: 0.5rem 0;
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
+        }
+
+        /* Logo Section Styles */
+        .logo-section {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            margin: 1rem;
+        }
+
+        .logo-section img {
+            max-width: 120px;
+            border-radius: 8px;
+            padding: 8px;
+            background-color: transparent;
+        }
+
+        .welcome-text {
+            color: #1e3a8a;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            opacity: 0.85;
+        }
+
+        /* Navigation Link Styles */
+        .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 0.75rem 1.5rem;
+            margin: 0.25rem 0.5rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #ffffff;
+            transform: translateX(3px);
+        }
+
+        .nav-link.active {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-link i {
+            width: 20px;
+            margin-right: 0.75rem;
+        }
+
+        /* Logout Button Styles */
+        .logout-btn {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b6b;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            transform: none;
+        }
+
+        /* ================================================
+           MAIN CONTENT STYLES
+        ================================================ */
+        .main-content {
+            padding: 2rem;
+        }
+
+        /* Page Header Styles */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .page-header .page-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+        }
+
+        .page-header .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .page-header .breadcrumb-item.active {
+            color: white;
+        }
+
+        .page-header .btn-outline-secondary {
+            border-color: rgba(255, 255, 255, 0.8);
+            color: white;
+        }
+
+        .page-header .btn-outline-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ================================================
+           CARD STYLES
+        ================================================ */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* ================================================
+           FORM STYLES
+        ================================================ */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        /* Section Title Styles */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Form Label Styles */
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Form Control Styles */
+        .form-control, .form-select {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        /* Form Validation Styles */
+        .form-control.is-invalid {
+            border-color: var(--secondary-color);
+        }
+
+        .form-control.is-invalid:focus {
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        .invalid-feedback {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-text {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+
+        /* ================================================
+           BUTTON STYLES
+        ================================================ */
+        .btn {
+            font-weight: 500;
+            border-radius: 8px;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-outline-secondary {
+            border: 1px solid #d1d5db;
+            color: #6b7280;
+            background: transparent;
+        }
+
+        .btn-outline-secondary:hover {
+            background: #f1f5f9;
+            color: var(--primary-color);
+        }
+
+        /* ================================================
+           TOAST NOTIFICATION STYLES
+        ================================================ */
+        .toast {
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .toast-header {
+            font-weight: 600;
+            color: white;
+        }
+
+        .toast-header.bg-danger {
+            background-color: var(--secondary-color);
+        }
+
+        .toast-header.bg-success {
+            background-color: var(--success-color);
+        }
+
+        /* ================================================
+           LOADING SPINNER STYLES
+        ================================================ */
+        .spinner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .spinner-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ================================================
+           RESPONSIVE DESIGN
+        ================================================ */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 250px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- ================================================
+                 SIDEBAR NAVIGATION
+            ================================================ -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <!-- Sidebar Content -->
+                <div class="sidebar-content">
+                    <!-- Logo and Welcome Section -->
+                    <div class="logo-section">
+                        <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo" class="img-fluid">
+                        <div class="welcome-text">Welcome, {{ username }}</div>
+                    </div>
+                    
+                    <!-- Navigation Menu -->
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/shipments">
+                                <i class="bi bi-box-seam"></i> Shipments
+                            </a>
+                        </li>
+                        <!-- Admin Only: Device Data -->
+                        {% if role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/device-data">
+                                <i class="bi bi-graph-up"></i> Device Data
+                            </a>
+                        </li>
+                        {% endif %}
+                        <!-- Current Active Page -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/new_shipment">
+                                <i class="bi bi-truck"></i> New Shipment
+                            </a>
+                        </li>
+                        <!-- Admin Only: Users Management -->
+                        {% if role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">
+                                <i class="bi bi-people"></i> Users
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/my_account">
+                                <i class="bi bi-person-circle"></i> My Account
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Sidebar Footer with Logout -->
+                <div class="sidebar-footer">
+                    <a class="nav-link logout-btn" href="/logout">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </nav>
+
+            <!-- ================================================
+                 MAIN CONTENT AREA
+            ================================================ -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 main-content">
+                <!-- Page Header with Title and Breadcrumb -->
+                <div class="page-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h1 class="page-title">Create New Shipment</h1>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="/shipments">Shipments</a></li>
+                                    <li class="breadcrumb-item active">Create</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <a href="/shipments" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-2"></i> Back to List
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ================================================
+                     SHIPMENT CREATION FORM
+                ================================================ -->
+                <div class="card">
+                    <div class="card-body">
+                        <form id="shipmentForm" onsubmit="return handleShipmentCreate(event)" class="needs-validation" novalidate action="/new_shipment" method="post">
+                            
+                            <!-- ========================================
+                                 SECTION 1: SHIPMENT DETAILS
+                            ======================================== -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-box-seam"></i> Shipment Details
+                                </h3>
+                                <div class="row g-3">
+                                    <!-- Shipment Number -->
+                                    <div class="col-md-6">
+                                        <label for="shipmentNumber" class="form-label">
+                                            <i class="bi bi-tag"></i> Shipment Number
+                                        </label>
+                                        <input type="text" class="form-control" id="shipmentNumber" name="shipmentNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter shipment number">
+                                        <div class="form-text">Unique identifier for this shipment</div>
+                                        <div class="invalid-feedback">Please enter a valid shipment number (3-50 characters)</div>
+                                    </div>
+
+                                    <!-- Container Number -->
+                                    <div class="col-md-6">
+                                        <label for="containerNumber" class="form-label">
+                                            <i class="bi bi-box"></i> Container Number
+                                        </label>
+                                        <input type="text" class="form-control" id="containerNumber" name="containerNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter container number">
+                                        <div class="form-text">Physical container identification</div>
+                                        <div class="invalid-feedback">Please enter a valid container number</div>
+                                    </div>
+
+                                    <!-- Goods Type -->
+                                    <div class="col-md-6">
+                                        <label for="goodsType" class="form-label">
+                                            <i class="bi bi-boxes"></i> Goods Type
+                                        </label>
+                                        <input type="text" class="form-control" id="goodsType" name="goodsType"
+                                               required minlength="2" maxlength="100" placeholder="Enter goods type">
+                                        <div class="invalid-feedback">Please enter a valid goods type (2-100 characters)</div>
+                                    </div>
+
+                                    <!-- Expected Delivery Date -->
+                                    <div class="col-md-6">
+                                        <label for="expectedDeliveryDate" class="form-label">
+                                            <i class="bi bi-calendar"></i> Expected Delivery
+                                        </label>
+                                        <input type="datetime-local" class="form-control" id="expectedDeliveryDate" name="expectedDeliveryDate"
+                                               required>
+                                        <div class="invalid-feedback">Please select a valid delivery date</div>
+                                    </div>
+
+                                    <!-- Route Details -->
+                                    <div class="col-12">
+                                        <label for="routeDetails" class="form-label">
+                                            <i class="bi bi-map"></i> Route Information
+                                        </label>
+                                        <textarea class="form-control" id="routeDetails" name="routeDetails"
+                                                  required minlength="5" maxlength="200" rows="3"
+                                                  placeholder="Enter detailed route information including origin, destination, and key waypoints"></textarea>
+                                        <div class="form-text">Detailed route from origin to destination</div>
+                                        <div class="invalid-feedback">Please enter route details (5-200 characters)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ========================================
+                                 SECTION 2: TRACKING & IDENTIFICATION
+                            ======================================== -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-qr-code-scan"></i> Tracking & Identification
+                                </h3>
+                                <div class="row g-3">
+                                    <!-- Device ID -->
+                                    <div class="col-md-6">
+                                        <label for="deviceId" class="form-label">
+                                            <i class="bi bi-hdd"></i> Device ID
+                                        </label>
+                                        <input type="text" class="form-control" id="deviceId" name="deviceId"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter device ID">
+                                        <div class="form-text">IoT tracking device identifier</div>
+                                        <div class="invalid-feedback">Please enter a valid device ID</div>
+                                    </div>
+
+                                    <!-- Purchase Order Number -->
+                                    <div class="col-md-6">
+                                        <label for="poNumber" class="form-label">
+                                            <i class="bi bi-file-text"></i> Purchase Order
+                                        </label>
+                                        <input type="text" class="form-control" id="poNumber" name="poNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter PO number">
+                                        <div class="form-text">Related purchase order number</div>
+                                        <div class="invalid-feedback">Please enter a valid PO number</div>
+                                    </div>
+
+                                    <!-- NDC Number -->
+                                    <div class="col-md-6">
+                                        <label for="ndcNumber" class="form-label">
+                                            <i class="bi bi-upc"></i> NDC Number
+                                        </label>
+                                        <input type="text" class="form-control" id="ndcNumber" name="ndcNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter NDC number">
+                                        <div class="form-text">National Drug Code identification</div>
+                                        <div class="invalid-feedback">Please enter a valid NDC number</div>
+                                    </div>
+
+                                    <!-- Serial Number of Goods -->
+                                    <div class="col-md-6">
+                                        <label for="serialNumberOfGoods" class="form-label">
+                                            <i class="bi bi-barcode"></i> Serial Number
+                                        </label>
+                                        <input type="text" class="form-control" id="serialNumberOfGoods" name="serialNumberOfGoods"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter serial number">
+                                        <div class="form-text">Goods serial number</div>
+                                        <div class="invalid-feedback">Please enter a valid serial number</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ========================================
+                                 SECTION 3: DELIVERY & BATCH INFORMATION
+                            ======================================== -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="bi bi-truck"></i> Delivery & Batch Information
+                                </h3>
+                                <div class="row g-3">
+                                    <!-- Delivery Number -->
+                                    <div class="col-md-6">
+                                        <label for="deliveryNumber" class="form-label">
+                                            <i class="bi bi-truck-flatbed"></i> Delivery Number
+                                        </label>
+                                        <input type="text" class="form-control" id="deliveryNumber" name="deliveryNumber"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter delivery number">
+                                        <div class="form-text">Delivery reference number</div>
+                                        <div class="invalid-feedback">Please enter a valid delivery number</div>
+                                    </div>
+
+                                    <!-- Batch ID -->
+                                    <div class="col-md-6">
+                                        <label for="batchId" class="form-label">
+                                            <i class="bi bi-collection"></i> Batch ID
+                                        </label>
+                                        <input type="text" class="form-control" id="batchId" name="batchId"
+                                               required pattern="[A-Za-z0-9-]{3,50}" placeholder="Enter batch ID">
+                                        <div class="form-text">Production batch identifier</div>
+                                        <div class="invalid-feedback">Please enter a valid batch ID</div>
+                                    </div>
+
+                                    <!-- Additional Notes -->
+                                    <div class="col-12">
+                                        <label for="shipmentDescription" class="form-label">
+                                            <i class="bi bi-chat-left-text"></i> Additional Notes
+                                        </label>
+                                        <textarea class="form-control" id="shipmentDescription" name="shipmentDescription"
+                                                  maxlength="500" rows="4" placeholder="Enter any additional information about this shipment (optional)"></textarea>
+                                        <div class="form-text">Optional additional details or special instructions</div>
+                                        <div class="invalid-feedback">Please keep the description under 500 characters</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ========================================
+                                 FORM ACTION BUTTONS
+                            ======================================== -->
+                            <div class="d-flex justify-content-end gap-3 mt-4 pt-4 border-top">
+                                <a href="/shipments" class="btn btn-outline-secondary">
+                                    <i class="bi bi-x-lg me-2"></i> Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-lg me-2"></i> Create Shipment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- ================================================
+         TOAST NOTIFICATION COMPONENTS
+    ================================================ -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <!-- Error Toast -->
+        <div id="errorToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <strong class="me-auto">Error</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="errorMessage"></div>
+        </div>
+        
+        <!-- Success Toast -->
+        <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <strong class="me-auto">Success</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="successMessage"></div>
+        </div>
+    </div>
+
+    <!-- ================================================
+         LOADING OVERLAY
+    ================================================ -->
+    <div class="spinner-container" id="spinner">
+        <div class="spinner-content">
+            <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mb-0 text-muted">Processing your request...</p>
+        </div>
+    </div>
+
+    <!-- ================================================
+         EXTERNAL JAVASCRIPT DEPENDENCIES
+    ================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        /* ================================================
+           UTILITY FUNCTIONS
+        ================================================ */
+        
+        /**
+         * Display error message using Bootstrap toast
+         * @param {string} message - Error message to display
+         */
+        function showErrorMessage(message) {
+            const errorToast = new bootstrap.Toast(document.getElementById('errorToast'));
+            document.getElementById('errorMessage').textContent = message;
+            errorToast.show();
+        }
+
+        /**
+         * Display success message using Bootstrap toast
+         * @param {string} message - Success message to display
+         */
+        function showSuccessMessage(message) {
+            const successToast = new bootstrap.Toast(document.getElementById('successToast'));
+            document.getElementById('successMessage').textContent = message;
+            successToast.show();
+        }
+
+        /* ================================================
+           FORM HANDLING FUNCTIONS
+        ================================================ */
+        
+        /**
+         * Handle shipment creation form submission
+         * @param {Event} event - Form submission event
+         * @returns {boolean} - Always returns false to prevent default submission
+         */
+        async function handleShipmentCreate(event) {
+            event.preventDefault();
+            const form = event.target;
+            
+            // Validate form before submission
+            if (!form.checkValidity()) {
+                form.classList.add('was-validated');
+                showErrorMessage('Please correct the errors in the form and try again.');
+                return false;
+            }
+
+            // Show loading spinner
+            document.getElementById('spinner').style.display = 'flex';
+            
+            try {
+                // Prepare form data and submit
+                const formData = new FormData(form);
+                const response = await fetch('/new_shipment', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                // Handle response
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Failed to create shipment');
+                }
+
+                // Success - show message and redirect
+                showSuccessMessage('Shipment created successfully!');
+                setTimeout(() => window.location.href = '/shipments', 2000);
+                
+            } catch (error) {
+                // Handle errors
+                showErrorMessage(error.message);
+            } finally {
+                // Hide loading spinner
+                document.getElementById('spinner').style.display = 'none';
+            }
+            
+            return false;
+        }
+
+        /* ================================================
+           INITIALIZATION AND EVENT LISTENERS
+        ================================================ */
+        
+        /**
+         * Initialize form validation and event listeners when DOM is loaded
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap form validation
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        });
+    </script>
+</body>
+</html>

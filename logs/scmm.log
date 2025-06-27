@@ -1,0 +1,482 @@
+2025-06-27 13:49:53,484 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:49:54,525 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:49:54,776 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:49:55,156 - backend.app.database - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:49:55,360 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:49:58,480 - backend.app.main - ERROR - 500 Internal Server Error: error-404.html
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 443, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 103, in __call__
+    response = await self.get_response(path, scope)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 160, in get_response
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 88, in __call__
+    response = await handler(request, exc)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\main.py", line 145, in not_found
+    return templates.TemplateResponse("error-404.html", {"request": request}, status_code=404)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 112, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 94, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: error-404.html
+
+2025-06-27 13:50:11,553 - backend.app.main - ERROR - 500 Internal Server Error: error-404.html
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 443, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 103, in __call__
+    response = await self.get_response(path, scope)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 160, in get_response
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 88, in __call__
+    response = await handler(request, exc)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\main.py", line 145, in not_found
+    return templates.TemplateResponse("error-404.html", {"request": request}, status_code=404)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 112, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 94, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: error-404.html
+
+2025-06-27 13:50:16,898 - backend.app.routers.login_route - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:50:16,898 - backend.app.routers.login_route - INFO - Searching for user with email: manojkumar065@gmail.com
+2025-06-27 13:50:17,318 - backend.app.routers.jwt_handler - INFO - Creating token for manojkumar065@gmail.com with 100 minutes expiry
+2025-06-27 13:50:17,336 - backend.app.routers.login_route - INFO - User manojkumar065@gmail.com logged in successfully
+2025-06-27 13:50:17,342 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:50:17,342 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:50:17,343 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 13:50:17,346 - backend.app.routers.dashboard_route - INFO - Dashboard accessed by user: manojkumar065@gmail.com
+2025-06-27 13:50:17,490 - backend.app.routers.dashboard_route - INFO - Rendering dashboard for user: Manojkumar, role: admin
+2025-06-27 13:50:17,491 - backend.app.routers.dashboard_route - INFO - Stats - Shipments: 7, Devices: 75, Users: 19
+2025-06-27 13:50:17,618 - backend.app.main - ERROR - 500 Internal Server Error: error-404.html
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 443, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 103, in __call__
+    response = await self.get_response(path, scope)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 160, in get_response
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 88, in __call__
+    response = await handler(request, exc)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\main.py", line 145, in not_found
+    return templates.TemplateResponse("error-404.html", {"request": request}, status_code=404)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 112, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 94, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: error-404.html
+
+2025-06-27 13:50:18,772 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:50:18,776 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:50:18,777 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 13:50:18,950 - backend.app.main - ERROR - 500 Internal Server Error: error-404.html
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 443, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 103, in __call__
+    response = await self.get_response(path, scope)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 160, in get_response
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 88, in __call__
+    response = await handler(request, exc)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\main.py", line 145, in not_found
+    return templates.TemplateResponse("error-404.html", {"request": request}, status_code=404)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 112, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 94, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: error-404.html
+
+2025-06-27 13:50:19,966 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:50:19,972 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:50:19,974 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 13:50:20,179 - backend.app.main - ERROR - 500 Internal Server Error: error-404.html
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 20, in __call__
+    raise e
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\fastapi\middleware\asyncexitstack.py", line 17, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 718, in __call__
+    await route.handle(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\routing.py", line 443, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 103, in __call__
+    response = await self.get_response(path, scope)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\staticfiles.py", line 160, in get_response
+    raise HTTPException(status_code=404)
+starlette.exceptions.HTTPException
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\cors.py", line 83, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\middleware\exceptions.py", line 88, in __call__
+    response = await handler(request, exc)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\main.py", line 145, in not_found
+    return templates.TemplateResponse("error-404.html", {"request": request}, status_code=404)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 112, in TemplateResponse
+    template = self.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\starlette\templating.py", line 94, in get_template
+    return self.env.get_template(name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\jinja2\loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: error-404.html
+
+2025-06-27 13:53:40,625 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:53:44,722 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:53:45,707 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:53:45,973 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:53:46,095 - backend.app.database - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:53:47,419 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:53:48,287 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:53:50,859 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:53:51,930 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:53:52,275 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:53:52,424 - backend.app.database - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:53:52,637 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:54:05,563 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:54:10,393 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:54:11,452 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:54:11,737 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:54:11,865 - backend.app.database - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:54:12,169 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:54:41,296 - backend.app.routers.login_route - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:54:41,297 - backend.app.routers.login_route - INFO - Searching for user with email: manojkumar065@gmail.com
+2025-06-27 13:54:41,680 - backend.app.routers.jwt_handler - INFO - Creating token for manojkumar065@gmail.com with 100 minutes expiry
+2025-06-27 13:54:41,684 - backend.app.routers.login_route - INFO - User manojkumar065@gmail.com logged in successfully
+2025-06-27 13:54:41,690 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:54:41,691 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:54:41,691 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 13:54:41,692 - backend.app.routers.dashboard_route - INFO - Dashboard accessed by user: manojkumar065@gmail.com
+2025-06-27 13:54:41,906 - backend.app.routers.dashboard_route - INFO - Rendering dashboard for user: Manojkumar, role: admin
+2025-06-27 13:54:41,907 - backend.app.routers.dashboard_route - INFO - Stats - Shipments: 7, Devices: 75, Users: 19
+2025-06-27 13:56:51,899 - backend.app.routers.signup_route - INFO - New registration attempt - Email: Manojkumawwwwwwr065@gmail.com, Username: d, Role: user
+2025-06-27 13:56:51,899 - backend.app.routers.signup_route - INFO - Registration attempt for email: Manojkumawwwwwwr065@gmail.com
+2025-06-27 13:56:51,900 - backend.app.routers.signup_route - INFO - Cleaned email: manojkumawwwwwwr065@gmail.com, username: d
+2025-06-27 13:56:52,219 - backend.app.routers.signup_route - INFO - Password hashed successfully for manojkumawwwwwwr065@gmail.com
+2025-06-27 13:56:52,230 - backend.app.routers.signup_route - ERROR - Registration error for manojkumawwwwwwr065@gmail.com: 1 validation error for Users
+username
+  String should have at least 3 characters [type=string_too_short, input_value='d', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_too_short
+2025-06-27 13:56:52,230 - backend.app.routers.signup_route - ERROR - Error type: <class 'pydantic_core._pydantic_core.ValidationError'>
+2025-06-27 13:56:52,234 - backend.app.routers.signup_route - ERROR - Full traceback: Traceback (most recent call last):
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\app\routers\signup_route.py", line 129, in register_user
+    user_doc = Users(
+  File "C:\Users\p.manojkumar\Desktop\SCMM\backend\venv-scmm\lib\site-packages\pydantic\main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Users
+username
+  String should have at least 3 characters [type=string_too_short, input_value='d', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.5/v/string_too_short
+
+2025-06-27 13:57:02,344 - backend.app.routers.signup_route - INFO - New registration attempt - Email: Manojkumawwwwwwr065@gmail.com, Username: user, Role: user
+2025-06-27 13:57:02,344 - backend.app.routers.signup_route - INFO - Registration attempt for email: Manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:02,344 - backend.app.routers.signup_route - INFO - Cleaned email: manojkumawwwwwwr065@gmail.com, username: user
+2025-06-27 13:57:02,669 - backend.app.routers.signup_route - INFO - Password hashed successfully for manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:02,672 - backend.app.routers.signup_route - INFO - User document created for: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:02,719 - backend.app.routers.signup_route - INFO - Insert result: InsertOneResult(ObjectId('685e55d6cf5a3bfebe1170a5'), acknowledged=True)
+2025-06-27 13:57:02,720 - backend.app.routers.signup_route - INFO - Inserted ID: 685e55d6cf5a3bfebe1170a5
+2025-06-27 13:57:02,756 - backend.app.routers.signup_route - INFO - User successfully verified in database: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:02,844 - backend.app.routers.signup_route - INFO - Total users in database: 20
+2025-06-27 13:57:02,845 - backend.app.routers.signup_route - INFO - User registered successfully: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:10,085 - backend.app.routers.login_route - INFO - === Login attempt for email: manojkumawwwwwwr065@gmail.com ===
+2025-06-27 13:57:10,085 - backend.app.routers.login_route - INFO - Searching for user with email: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:10,403 - backend.app.routers.jwt_handler - INFO - Creating token for manojkumawwwwwwr065@gmail.com with 100 minutes expiry
+2025-06-27 13:57:10,405 - backend.app.routers.login_route - INFO - User manojkumawwwwwwr065@gmail.com logged in successfully
+2025-06-27 13:57:10,410 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:10,410 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:10,411 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:10,412 - backend.app.routers.dashboard_route - INFO - Dashboard accessed by user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:10,586 - backend.app.routers.dashboard_route - INFO - Rendering dashboard for user: user, role: user
+2025-06-27 13:57:10,586 - backend.app.routers.dashboard_route - INFO - Stats - Shipments: 7, Devices: 75, Users: 20
+2025-06-27 13:57:13,336 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:13,337 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:13,337 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:15,311 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:15,312 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:15,313 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:28,478 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:28,478 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:28,479 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:42,845 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:42,846 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:42,846 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:42,978 - backend.app.routers.new_shipment_route - INFO - Shipment created successfully by manojkumawwwwwwr065@gmail.com: ssssssssssssssssssssssssss
+2025-06-27 13:57:45,017 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:45,018 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:45,018 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:48,457 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:48,458 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:48,458 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:49,049 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:49,049 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:49,050 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:49,295 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:49,296 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:49,296 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:57:51,465 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 13:57:51,465 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 13:57:51,466 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumawwwwwwr065@gmail.com
+2025-06-27 13:58:35,723 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:58:38,944 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:58:45,054 - backend.app.database - ERROR - ❌ MongoDB connection failed: ac-ipyp9go-shard-00-01.xamvjdv.mongodb.net:27017: The read operation timed out (configured timeouts: socketTimeoutMS: 5000.0ms, connectTimeoutMS: 5000.0ms)
+2025-06-27 13:58:45,055 - backend.app.database - ERROR - 🔗 Attempted URL: mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority
+2025-06-27 13:58:45,185 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:59:44,842 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:59:46,303 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:59:47,556 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:59:47,794 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:59:47,916 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 13:59:48,435 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:59:48,763 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:59:50,514 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:59:51,250 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:59:51,500 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 13:59:51,622 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 13:59:51,742 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:00:07,202 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:00:09,112 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:00:09,966 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:00:10,255 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:00:10,381 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:00:10,540 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:01:54,632 - backend.app.routers.login_route - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 14:01:54,632 - backend.app.routers.login_route - INFO - Searching for user with email: manojkumar065@gmail.com
+2025-06-27 14:01:54,997 - backend.app.routers.jwt_handler - INFO - Creating token for manojkumar065@gmail.com with 100 minutes expiry
+2025-06-27 14:01:55,003 - backend.app.routers.login_route - INFO - User manojkumar065@gmail.com logged in successfully
+2025-06-27 14:01:55,013 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:01:55,013 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:01:55,013 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:01:55,015 - backend.app.routers.dashboard_route - INFO - Dashboard accessed by user: manojkumar065@gmail.com
+2025-06-27 14:01:55,171 - backend.app.routers.dashboard_route - INFO - Rendering dashboard for user: Manojkumar, role: admin
+2025-06-27 14:01:55,172 - backend.app.routers.dashboard_route - INFO - Stats - Shipments: 8, Devices: 75, Users: 20
+2025-06-27 14:01:56,542 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:01:56,542 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:01:56,543 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:02:06,824 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:02:06,824 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:02:06,825 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:02:07,478 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:02:07,479 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:02:07,479 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:02:07,658 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:02:07,658 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:02:07,659 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:44,877 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:04:47,191 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:04:48,124 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:04:48,403 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:04:48,609 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:04:48,792 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:04:51,423 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:51,423 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:51,426 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:52,788 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:52,789 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:52,790 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:52,973 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:52,974 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:52,975 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:53,187 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:53,187 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:53,189 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:53,365 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:53,365 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:53,367 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:53,538 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:53,539 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:53,540 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:53,728 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:53,729 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:53,731 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:53,921 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:53,922 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:53,924 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:54,397 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:54,397 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:54,397 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:54,610 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:54,611 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:54,613 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:04:54,796 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:04:54,797 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:04:54,798 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:17,376 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:05:19,707 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:05:20,581 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:05:20,828 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:05:20,946 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:05:21,135 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:05:25,025 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:25,027 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:25,032 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:26,832 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:26,833 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:26,833 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:27,664 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:27,665 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:27,666 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:27,667 - backend.app.routers.dashboard_route - INFO - Dashboard accessed by user: manojkumar065@gmail.com
+2025-06-27 14:05:27,838 - backend.app.routers.dashboard_route - INFO - Rendering dashboard for user: Manojkumar, role: admin
+2025-06-27 14:05:27,839 - backend.app.routers.dashboard_route - INFO - Stats - Shipments: 8, Devices: 75, Users: 20
+2025-06-27 14:05:28,296 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:28,297 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:28,297 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:29,160 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:29,160 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:29,161 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:29,621 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:29,622 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:29,622 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:05:30,042 - backend.app.routers.jwt_handler - INFO - Token from cookie
+2025-06-27 14:05:30,043 - backend.app.routers.jwt_handler - INFO - Processing token (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+2025-06-27 14:05:30,044 - backend.app.routers.jwt_handler - INFO - Token validated successfully for user: manojkumar065@gmail.com
+2025-06-27 14:06:32,719 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:06:34,645 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:06:35,606 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:06:35,867 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:06:35,987 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:06:36,113 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:06:41,343 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:06:43,339 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:06:44,199 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:06:44,447 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:06:44,559 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:06:44,699 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:06:52,547 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:06:56,658 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:06:58,262 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:06:58,555 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:06:58,673 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:06:58,812 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:09:55,558 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:09:57,457 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:09:58,782 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:09:59,036 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:09:59,145 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:09:59,517 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:10:14,865 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:10:19,892 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:10:20,810 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:10:21,084 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:10:21,202 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:10:21,332 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:10:50,878 - backend.app.main - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 14:11:02,580 - backend.app.database - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 14:11:04,565 - backend.app.database - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 14:11:05,235 - backend.app.database - INFO - ✅ Indexes created successfully
+2025-06-27 14:11:05,441 - backend.app.database - INFO - 📦 Document counts — Users: 20, Shipments: 8, Devices: 75
+2025-06-27 14:11:05,577 - backend.app.main - INFO - 🔄 Starting SCMM Application...
+2025-06-27 14:11:23,552 - backend.app.main - INFO - 🛑 SCMM Application shutdown.

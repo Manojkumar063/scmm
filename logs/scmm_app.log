@@ -1,0 +1,28 @@
+2025-06-27 13:45:13,670 - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:Mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database None
+2025-06-27 13:45:14,132 - ERROR - ❌ MongoDB connection failed: name must be an instance of str
+2025-06-27 13:45:14,133 - ERROR - 🔗 Attempted URL: mongodb+srv://manojkumarpandi8:Mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority
+2025-06-27 13:45:14,405 - INFO - 🔄 Starting SCMM Application...
+2025-06-27 13:45:32,600 - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:45:32,601 - WARNING - users_data is None, attempting to reconnect to database...
+2025-06-27 13:45:32,877 - ERROR - ❌ Reconnection failed: name must be an instance of str
+2025-06-27 13:45:32,877 - ERROR - Database reconnection failed during login.
+2025-06-27 13:45:34,021 - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:45:34,267 - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:45:34,569 - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:45:34,770 - INFO - === Login attempt for email: manojkumar065@gmail.com ===
+2025-06-27 13:46:46,457 - INFO - 🛑 SCMM Application shutdown.
+2025-06-27 13:46:50,725 - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:46:51,933 - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:46:52,180 - INFO - ✅ Indexes created successfully
+2025-06-27 13:46:52,293 - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:46:52,333 - ERROR - JWT_SECRET environment variable not set
+2025-06-27 13:48:15,565 - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:48:16,847 - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:48:17,184 - INFO - ✅ Indexes created successfully
+2025-06-27 13:48:17,326 - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:48:17,370 - ERROR - JWT_SECRET environment variable not set
+2025-06-27 13:48:33,412 - INFO - Connecting to MongoDB at mongodb+srv://manojkumarpandi8:mk271102@cluster0.xamvjdv.mongodb.net/supply_chain_db?retryWrites=true&w=majority with database supply_chain_db
+2025-06-27 13:48:34,445 - INFO - ✅ Connected to MongoDB database: supply_chain_db
+2025-06-27 13:48:34,709 - INFO - ✅ Indexes created successfully
+2025-06-27 13:48:34,894 - INFO - 📦 Document counts — Users: 19, Shipments: 7, Devices: 75
+2025-06-27 13:48:34,936 - ERROR - JWT_SECRET environment variable not set

@@ -5,63 +5,75 @@ A FastAPI-based supply chain management application with real-time IoT data stre
 ## Current Project Structure
 ```
 SCMM/
-├── main.py                 # FastAPI application entry point
-├── database.py            # MongoDB database configuration
-├── models.py              # Pydantic data models
-├── requirements.txt       # Project dependencies
-├── README.md             # Project documentation
-│
-├── kafka_module/                # Kafka Integration
-│   ├── consumer.py       # Kafka consumer implementation
-│   ├── server.py         # server
-│   ├── docker-compose.yml  #docker yml file
-│   └── producer.py       # Kafka producer implementation
-│
-├── routers/              # API Routes
-│   ├── __init__.py
-│   ├── account.py        # Account management routes
-│   ├── cookie_handler.py # Cookie management utilities
-│   ├── dashboard_route.py # Dashboard data routes
-│   ├── device_data_route.py # Device management routes
-│   ├── jwt_handler.py    # JWT authentication handler
-│   ├── login_route.py    # Login endpoints
-│   ├── logout_route.py   # Logout endpoints
-│   ├── my_shipment_route.py # User shipment routes
-│   ├── new_shipment_route.py # Create shipment routes
-│   ├── signup_route.py   # Registration routes
-│   └── user_route.py     # User management routes
-│
-├── static/              # Static Assets
-│   ├── css/
-│   │   └── styles.css   # Global CSS styles
-│   ├── images/
-│   │   └── download.jpg # Application images
-│   └── js/
-│       ├── auth.js      # Authentication JavaScript
-│       ├── create-shipment.js # Shipment creation logic
-│       ├── device-data-manager.js # Device data handling
-│       ├── login.js     # Login form handling
-│       ├── my_shipment.js # Shipment management
-│       ├── register.js  # Registration form handling
-│       └── security.js  # Security utilities
-│
-├── templates/           # HTML Templates
-│   ├── account.html    # Account profile page
-│   ├── create-shipment.html # New shipment form
-│   ├── device-data.html # Device monitoring dashboard
-│   ├── error-404.html  # Error page
-│   ├── landingpage.html # Landing page
-│   ├── login.html      # Login page
-│   ├── my_shipment.html # User shipments view
-│   ├── register.html   # Registration page
-│   ├── scm-dashboard.html # Main dashboard
-│   └── users.html      # User management interface
-│
-└── venv-scmm/          # Virtual Environment
-    ├── Include/
-    ├── Lib/
-    │   └── site-packages/ # Python dependencies
-    └── Scripts/          # Virtual environment executables
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+├── requirements.txt
+├── backend/
+│   ├── __init__
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── database.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── routers/
+│   │   │   ├── __init__.py
+│   │   │   ├── account.py
+│   │   │   ├── cookie_handler.py
+│   │   │   ├── dashboard_route.py
+│   │   │   ├── device_data_route.py
+│   │   │   ├── jwt_handler.py
+│   │   │   ├── login_route.py
+│   │   │   ├── logout_route.py
+│   │   │   ├── my_shipment_route.py
+│   │   │   ├── new_shipment_route.py
+│   │   │   ├── signup_route.py
+│   │   │   ├── user_route.py
+│   │   │   └── __pycache__/
+│   │   ├── static/
+│   │   │   ├── css/
+│   │   │   │   └── styles.css
+│   │   │   ├── images/
+│   │   │   ├── js/
+│   │   │   └── uploads/
+│   │   └── templates/
+│   │       ├── account.html
+│   │       ├── create-shipment.html
+│   │       ├── device-data.html
+│   │       ├── error-404.html
+│   │       ├── landingpage.html
+│   │       ├── login.html
+│   │       ├── my_shipment.html
+│   │       ├── register.html
+│   │       ├── scm-dashboard.html
+│   │       └── users.html
+│   ├── kafka/
+│   │   ├── __init__.py
+│   │   ├── consumer/
+│   │   │   ├── __init__.py
+│   │   │   ├── consumer.py
+│   │   │   ├── Dockerfile
+│   │   │   └── requirements.txt
+│   │   ├── producer/
+│   │   │   ├── __init__.py
+│   │   │   ├── Dockerfile
+│   │   │   ├── producer.py
+│   │   │   └── requirements.txt
+│   │   └── server/
+│   │       ├── __init__.py
+│   │       ├── Dockerfile
+│   │       └── server.py
+│   └── venv-scmm/
+│       ├── LICENSE.txt
+│       ├── pyvenv.cfg
+│       ├── Include/
+│       ├── Lib/
+│       │   └── site-packages/
+│       └── Scripts/
+│           ├── activate
+│           ├── activate.bat
+│           ├── Activate.ps1
+│           ├── ...
 ```
 
 ## Key Features

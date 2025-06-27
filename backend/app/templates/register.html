@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCMXPertLite - Create Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="/static/images/download.jpg" type="image/jpeg">
+    <!-- <link href="/static/css/styles.css" rel="stylesheet"> -->
+    
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #dc2626;
+            --accent-color: #3b82f6;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
+            --background-color: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Professional supply chain background pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                /* Subtle grid pattern */
+                linear-gradient(rgba(30, 58, 138, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 58, 138, 0.03) 1px, transparent 1px),
+                /* Supply chain network nodes */
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.05) 2px, transparent 2px);
+            background-size: 
+                60px 60px,
+                60px 60px,
+                400px 400px,
+                400px 400px,
+                400px 400px,
+                400px 400px,
+                400px 400px;
+            z-index: 0;
+        }
+
+        /* Supply chain connection lines */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                /* Diagonal connection lines */
+                linear-gradient(45deg, transparent 48%, rgba(59, 130, 246, 0.02) 49%, rgba(59, 130, 246, 0.02) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(59, 130, 246, 0.02) 49%, rgba(59, 130, 246, 0.02) 51%, transparent 52%);
+            background-size: 200px 200px, 200px 200px;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 480px;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                0 2px 8px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.12),
+                0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="supply-chain" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23supply-chain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-top: 0.5rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
+        .input-group .btn-outline-secondary {
+            border: 1px solid #d1d5db;
+            border-radius: 0 8px 8px 0;
+            background: #fff;
+            color: #6b7280;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .input-group .btn-outline-secondary:hover {
+            background: #f1f5f9;
+            color: var(--accent-color);
+        }
+
+        .invalid-feedback {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        .form-check-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color) 0%, #2563eb 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            width: 100%;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.25rem;
+        }
+
+        .login-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .login-link a:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .alert {
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: var(--success-color);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .strength-meter {
+            height: 3px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 0.25rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease, background 0.3s ease;
+            width: 0;
+        }
+
+        .strength-weak { background: var(--secondary-color); width: 25%; }
+        .strength-fair { background: var(--warning-color); width: 50%; }
+        .strength-good { background: var(--success-color); width: 75%; }
+        .strength-strong { background: #059669; width: 100%; }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .card-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .logo-container img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="card-header">
+                <div class="logo-container">
+                    <img src="https://www.exf-financialdatasolutions.com/wp-content/uploads/2024/10/cropped-39791-Exafluence-favicon.webp" alt="Exafluence Logo">
+                </div>
+                <h1 class="page-title">Create Account</h1>
+                <p class="page-subtitle">Join SCMXPertLite Platform</p>
+            </div>
+            <div class="card-body">
+                {% if message %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+
+                <form id="registerForm" action="/register" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">
+                            <i class="bi bi-person"></i> Username
+                        </label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <div class="input-icon">
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            <i class="bi bi-envelope"></i> Email Address
+                        </label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="input-icon">
+                                <i class="bi bi-envelope-check"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="input-icon">
+                                <i class="bi bi-eye" id="togglePassword" style="cursor: pointer;"></i>
+                            </div>
+                        </div>
+                        <div class="strength-meter">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="form-text">
+                            <i class="bi bi-info-circle"></i> Password must be at least 8 characters and contain at least one digit, one letter, and one special character.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">
+                            <i class="bi bi-lock-fill"></i> Confirm Password
+                        </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
+                            <div class="input-icon">
+                                <i class="bi bi-check-circle" id="passwordMatch" style="display: none; color: var(--success-color);"></i>
+                                <i class="bi bi-x-circle" id="passwordMismatch" style="display: none; color: var(--secondary-color);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="role" name="role" value="user">
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-2"></i> Create Account
+                        </button>
+                    </div>
+
+                    <div class="login-link">
+                        <a href="/login">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> Already have an account? Sign in
+                        </a>
+                    </div>
+                </form>
+
+                <div id="errorMessage" class="alert alert-danger mt-3 d-none" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <span id="errorText"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getRegisterForm.getElementById('password');
+            const icon = this;
+            if (password.type === 'password') {
+                password.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                password.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthFill = document.getElementById('strengthFill');
+            
+            // Reset strength meter
+            strengthFill.className = 'strength-fill';
+            
+            if (password.length === 0) {
+                return;
+            }
+            
+            // Calculate password strength
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 1;
+            if (password.length >= 12) strength += 1;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+            
+            // Update strength meter
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+            } else if (strength === 3) {
+                strengthFill.classList.add('strength-fair');
+            } else if (strength === 4) {
+                strengthFill.classList.add('strength-good');
+            } else {
+                strengthFill.classList.add('strength-strong');
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            const matchIcon = document.getElementById('passwordMatch');
+            const mismatchIcon = document.getElementById('passwordMismatch');
+            
+            if (confirmPassword.length === 0) {
+                matchIcon.style.display = 'none';
+                mismatchIcon.style.display = 'none';
+                return;
+            }
+            
+            if (password === confirmPassword) {
+                matchIcon.style.display = 'inline-block';
+                mismatchIcon.style.display = 'none';
+            } else {
+                matchIcon.style.display = 'none';
+                mismatchIcon.style.display = 'inline-block';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            // Reset error message
+            errorMessage.classList.add('d-none');
+            
+            // Password validation
+            if (password.length < 8) {
+                e.preventDefault();
+                errorText.textContent = 'Password must be at least 8 characters long.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[0-9]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one number.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[A-Za-z]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one letter.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            if (!/[^A-Za-z0-9]/.test(password)) {
+                e.preventDefault();
+                errorText.textContent = 'Password must contain at least one special character.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+            
+            // Password match validation
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                errorText.textContent = 'Passwords do not match.';
+                errorMessage.classList.remove('d-none');
+                return;
+            }
+        });
+    </script>
+</body>
+</html>
