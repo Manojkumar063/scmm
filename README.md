@@ -116,10 +116,18 @@ JWT_SECRET=your_jwt_secret
 
 4. Run the application:
 ```powershell
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+uvicorn backend.app.main:app --reload --port 8001
 ```
 
 ## API Documentation
 Once running, access the API documentation at:
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
+
+#Build and start all services using Docker Compose
+#Open a terminal in your project root and run:
+```
+docker-compose down
+docker-compose build
+docker-compose up -d
+```
