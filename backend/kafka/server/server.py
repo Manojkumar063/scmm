@@ -24,7 +24,7 @@ SERVER = '0.0.0.0'  # Bind to all interfaces for Docker compatibility
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-MESSAGE_INTERVAL = 2  # Seconds between messages
+MESSAGE_INTERVAL = 30  # Seconds between messages (changed from 2 to 30)
 
 # Predefined simulation routes
 ROUTES = [
