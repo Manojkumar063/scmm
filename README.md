@@ -154,6 +154,7 @@ docker-compose up -d --scale kafka-consumer=3
 4. Push to branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+<<<<<<< HEAD
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -167,3 +168,22 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with ❤️ for modern supply chain management**
+=======
+4. Run the application:
+```powershell
+uvicorn backend.app.main:app --reload --port 8001
+```
+
+## API Documentation
+Once running, access the API documentation at:
+- Swagger UI: `http://localhost:8000/docs`
+- ReDoc: `http://localhost:8000/redoc`
+
+#Build and start all services using Docker Compose
+#Open a terminal in your project root and run:
+```
+docker-compose down
+docker-compose build
+docker-compose up -d
+```
+>>>>>>> 0bb568122e79e3af5fb46e2605d51ad5d7b228f8
