@@ -167,7 +167,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for modern supply chain management**
+**Built with  for modern supply chain management**
 =======
 4. Run the application:
 ```powershell
