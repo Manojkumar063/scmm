@@ -1,3 +1,6 @@
+"""
+- Subscribes to the Kafka topic, consumes the messages, and saves them to MongoDB.
+"""
 # ────────────────────────────────────────────────────────────────────────────────
 # Imports
 # ────────────────────────────────────────────────────────────────────────────────
@@ -103,3 +106,25 @@ if __name__ == "__main__":
 
     except Exception as e:
         logger.error(f"Fatal error in consumer: {str(e)}")
+
+
+
+
+
+"""📥 Kafka to MongoDB Consumer - consumer.py
+
+📌 Purpose:
+Consumes telemetry messages from Kafka and stores them in MongoDB.
+
+⚙️ How it Works:
+- Connects to Kafka and subscribes to the 'device-data' topic.
+- Continuously polls for new messages.
+- For each message:
+    ▸ Parses the JSON content
+    ▸ Inserts it into the 'device_data' collection in MongoDB
+- Handles Kafka/MongoDB errors and supports retry logic.
+- Gracefully shuts down on Ctrl+C.
+
+🐳 Docker:
+Installs dependencies, sets working directory, and runs consumer.py.
+"""

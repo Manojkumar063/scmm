@@ -5,6 +5,7 @@ Simple TCP Server to simulate device telemetry data.
 - Each message includes Battery Level, Device ID, Temperature, Route From/To
 - Useful for testing client-side systems that receive sensor data
 - Handles multiple client connections
+- Simulates IoT devices by generating random telemetry data and sending it over TCP.
 """
 # ────────────────────────────────────────────────────────────────────────────────
 # Imports
@@ -175,3 +176,27 @@ if __name__ == "__main__":
     print(f"[STARTUP] Starting TCP Telemetry Server on port {PORT}")
     print(f"[INFO] Server will send data every {MESSAGE_INTERVAL} seconds")
     start_server()
+
+
+""" 🛰️  TCP Data Simulator - server.py
+
+📌 Purpose:
+Simulates IoT devices by generating random telemetry data 
+and sends it to connected TCP clients.
+
+⚙️  How it Works:
+- Listens on TCP port (default: 8000).
+- For each client:
+    ▸ Starts a new thread
+    ▸ Sends one JSON message every 30 seconds
+- Each message includes:
+    ▸ Battery_Level
+    ▸ Device_ID
+    ▸ First_Sensor_temperature
+    ▸ Route_From, Route_To
+    ▸ timestamp
+- Supports multiple clients concurrently using threading.
+
+🐳 Docker:
+Uses a lightweight Python image to build and run this server.
+"""

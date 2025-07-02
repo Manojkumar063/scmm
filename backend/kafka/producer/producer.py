@@ -1,3 +1,5 @@
+"""- Connects to the TCP server, receives the telemetry data, 
+      and publishes it to a Kafka topic (device-data)."""
 # ────────────────────────────────────────────────────────────────────────────────
 # Imports
 # ────────────────────────────────────────────────────────────────────────────────
@@ -155,3 +157,23 @@ def main():
 # ────────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     main()
+
+
+"""🔗 TCP to Kafka Bridge - producer.py
+
+📌 Purpose:
+Acts as a bridge between the TCP server and Kafka.
+Reads IoT telemetry data from a TCP socket and publishes it to Kafka.
+
+⚙️ How it Works:
+- Connects to the TCP server (host/port can be configured).
+- Initializes a Kafka producer (using kafka-python).
+- Continuously reads JSON messages from the socket.
+- For each message:
+    ▸ Parses the JSON
+    ▸ Publishes it to the Kafka topic 'device-data'
+- Handles network errors and Kafka retries gracefully.
+
+🐳 Docker:
+Installs dependencies, copies the source code, and runs producer.py.
+"""    
